@@ -1,0 +1,69 @@
+* L'usage de @mysql_*()@ est déprécié depuis PHP 5.5[1]. Son implémentation est techniquement limitée (pas de support des requêtes préparées ni des transactions) et dangereuse si mal utilisée (e.g. @mysql_real_escape_string()@[2]). Préférer @mysqli_*()@[3] voir même PDO[4] en conjonction des requêtes préparées[5].
+* L'usage de @addslashes()@ est absolument déconseillé. Il existe deux possibilités où des injections sont possibles:
+** Lorsque la valeur à insérer est un entier, celle-ci ne doit pas être entourée de guillemets. L'attaquent n'a donc pas besoin d'en injecter pour délimiter la valeur et par conséquent, il peut détourner la requête[6].
+** Lorsque la valeur à insérer est composée de caractères multi-octets, les variations d'encodage rendent certains caractères spéciaux invisibles aux yeux de @addslashes()@ tout en étant interprété par le SGBD[7].
+* Considérer que @BLOB@ et @TEXT@ sont similaire est absolument faux. Le premier type est strictement binaire et permet de stocker des données brutes. Le second associe un encodage aux données afin de façonner la représentation de celle-ci. De ce fait, le contenu de @TEXT@ ne sera pas forcement identique aux données d'origine.
+* Considérer que @VARCHAR@ et @TEXT@ sont similaire est également faux[8]. Le tableau suivant montre les principales différences entre ces deux types[9].
+
+|_. Critère|_. VARCHAR|_. TEXT|
+|=. *Standard ISO/CEI 9075*|=. Oui|=. Non|
+|=. *Représentation*|=. Contenue dans l'enregistrement|=. Séparément de l'enregistrement|
+|=. *Contrainte @UNIQUE@*|=. Oui|=. Non|
+|=. *Index*|=. Oui|=. Complexe voir impossible|
+|=. *@GROUP/ORDER BY@*|=. Oui|=. Incohérent|
+|=. *@FULLTEXT@*|=. Non|=. Oui|
+|=. *Valeur par défaut*|=. Oui|=. @NULL@ ou non définie|
+|=. *Taille maximale*|=. 2^8 ou 2^16 caractères|=. 2^16 octets|
+
+* Les bonnes pratiques veulent que l'on teste systématiquement au moins l'existence de toute donnée contenue dans les Superglobales[10]. Dans la démo présentée durant la vidéo[11], on effectue @$file = $_FILES['image']['tmp_name'];@ et seulement après, on teste @!isset($file)@. Non seulement PHP est censé annoncer une erreur de niveau E&#95;NOTICE (ici, probablement désactivée dans la configuration de PHP), mais cette forme d'écriture laisse penser que l'affectation d'une valeur dans @$file@ (peu importe si elle est définie ou non) pourrait entrainer sa création. Ceci est faux dans la plupart des cas du fait des optimisations apportées à l'exécution par l'interpréteur[12] (affectation par référence plutôt que par copie).
+* @getimagesize()@ annonce, en plus de retourner @FALSE@ en cas d'erreur, une erreur de niveau @E_NOTICE@[13]. Préférer l'utilisation de l'extension Fileinfo[14] pour tester le type réel du fichier.
+* @<p />@ n'est absolument pas standard, que ce soit en SGML, HTML4, XHTML ou HTML5.
+* Utiliser un @header("Content-type: image/jpeg");@ statique peut engendrer des comportements imprévisibles selon les navigateurs. Le type MIME associé indiqué doit impérativement représenter le format réel du fichier. Il est contre-intuitif de signaler au navigateur un @Content-type: image/jpeg@ alors que le fichier est un PNG par exemple.
+
+Après, sur l'idée de stocker des fichiers dans un SGBD classique, je suis convaincu que ce n'est pas une bonne idée dans la majorité des cas. A quoi bon y stocker des données statiques alors que le but premier du SGBD est de les manipuler, les trier, les transformer, les agréger... Mais il existe malgré tout des SGBD orientés documents[15] et des solutions d'entreprise[16] qui sont conçues pour ce genre de choses.
+A coté de ça, il y a PostgreSQL qui a subit de nettes améliorations ces dernières années mais qui est encore loin de faire des merveilles.
+Enfin, MySQL... Il n'est clairement pas conçu pour gérer du @BLOB@. S'il propose ce type de donnée, c'est juste pour suivre le standard.
+
+Voilà une série de liens qui expliquent pourquoi ce concept n'est, de loin, pas le meilleur. Ça touche aussi bien MySQL que l'idée en général. Je n'ai pas franchement le temps ni l'envie de commenter vu qu'il y a juste tellement à dire.
+
+* "Speed of mysql query on tables containing blob depends on filesystem cache":http://stackoverflow.com/questions/9511476/speed-of-mysql-query-on-tables-containing-blob-depends-on-filesystem-cache
+* "Blob Storage in Innodb":http://www.percona.com/blog/2010/02/09/blob-storage-in-innodb/
+* "Performance base mysql avec 95% de blob et 5% de données (base de qq dizaines de Go)":http://www.developpez.net/forums/d1275290/bases-donnees/mysql/administration/performance-base-mysql-95-blob-5-donnees-base-qq-dizaines-go/#post6966945
+* "Should I use MySQL blob field type?":http://stackoverflow.com/questions/1717264/should-i-use-mysql-blob-field-type
+* "Storing Images in DB - Yea or Nay?":http://stackoverflow.com/questions/3748/storing-images-in-db-yea-or-nay
+* "I WILL NOT BLOB":http://mysqldatabaseadministration.blogspot.fr/2008/01/i-will-not-blob.html
+* "Handling long texts/blobs in InnoDB - 1 to 1 relationship, covering index":http://yoshinorimatsunobu.blogspot.fr/2010/11/handling-long-textsblobs-in-innodb-1-to.html
+* "Mysql BLOBs and memory allocation":http://mysqlinsights.blogspot.fr/2009/01/mysql-blobs-and-memory-allocation.html
+
+
+fn1. "http://php.net/manual/en/intro.mysql.php":http://php.net/manual/en/intro.mysql.php
+
+fn2. "http://php.net/manual/en/function.mysql-real-escape-string.php":http://php.net/manual/en/function.mysql-real-escape-string.php
+
+fn3. "http://php.net/manual/en/book.mysqli.php":http://php.net/manual/en/book.mysqli.php
+
+fn4. "http://php.net/manual/en/book.pdo.php":http://php.net/manual/en/book.pdo.php
+
+fn5. "http://php.net/manual/en/pdo.prepared-statements.php":http://php.net/manual/en/pdo.prepared-statements.php
+
+fn6. "http://stackoverflow.com/a/2542498":http://stackoverflow.com/a/2542498
+
+fn7. "http://securityreliks.securegossip.com/2011/02/sql-injection-bypassing-addslashes/":http://securityreliks.securegossip.com/2011/02/sql-injection-bypassing-addslashes/
+
+fn8. "http://dev.mysql.com/doc/refman/5.0/en/blob.html":http://dev.mysql.com/doc/refman/5.0/en/blob.html
+
+fn9. "http://www.pythian.com/blog/text-vs-varchar/":http://www.pythian.com/blog/text-vs-varchar/
+
+fn10. "http://php.net/manual/en/language.variables.superglobals.php":http://php.net/manual/en/language.variables.superglobals.php
+
+fn11. "https://www.youtube.com/watch?v=o-0bfleqE2g":https://www.youtube.com/watch?v=o-0bfleqE2g
+
+fn12. "http://php.net/manual/en/features.gc.refcounting-basics.php":http://php.net/manual/en/features.gc.refcounting-basics.php -- Exemple #3
+
+fn13. "http://php.net/manual/en/function.getimagesize.php":http://php.net/manual/en/function.getimagesize.php
+
+fn14. "http://php.net/manual/en/book.fileinfo.php":http://php.net/manual/en/book.fileinfo.php
+
+fn15. "http://en.wikipedia.org/wiki/Document-oriented_database":http://en.wikipedia.org/wiki/Document-oriented_database
+
+fn16. "http://www.oracle.com/us/products/database/overview/index.html":http://www.oracle.com/us/products/database/overview/index.html
