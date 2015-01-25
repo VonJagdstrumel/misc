@@ -32,24 +32,7 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 
 #### Modules ####
 
-##### Apache Httpd #####
-
-* Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
-* Affichage et modification de la configuration
-* Récapitulatif des vhosts
-* Ports ouverts
-* Affichage des modules activés
-* Accès aux logs
-* Stop/Restart
-* Annuaire des webservices
-
-##### Nginx #####
+##### Apache Httpd/Nginx #####
 
 * Affichage des informations du processus
 	* PID
@@ -67,7 +50,7 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 * Annuaire des webservices
 * Modules activés
 
-##### MySQL #####
+##### MySQL/PostgreSQL #####
 
 * Affichage des informations du processus
 	* PID
@@ -79,9 +62,8 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 	* Commande d'execution
 * Affichage et modification de la configuration
 * Stop/Restart
-* Accès phpmyadmin
+* Accès Adminer
 * Récapitulatif des bases et utilisateurs
-* Affichage des moteurs activés
 * Ports ouverts
 * Accès aux logs
 
@@ -116,7 +98,7 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 * Accès aux logs
 * Ports ouverts
 
-##### BTSync #####
+##### BTSync/Syncthing #####
 
 * Affichage des informations du processus
 	* PID
@@ -167,7 +149,7 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 * Accès aux logs
 * Récapitulatif des torrents
 
-##### FreeLan #####
+##### FreeLan/OpenVPN #####
 
 * Affichage des informations du processus
 	* PID
@@ -182,22 +164,6 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 * Ports ouverts
 * Accès aux logs
 * Recapitulatif des liaisons
-
-##### OpenVPN #####
-
-* Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
-* Stop/Restart
-* Affichage et modification de la configuration
-* Ports ouverts
-* Accès aux logs
-* Récapitulatif des liaisons
 
 ##### Polipo/Privoxy #####
 
