@@ -31,7 +31,7 @@ abstract class Enum
     }
 }
 
-class LolEnum extends Enum
+class EnumTest extends Enum
 {
     const ZERO = 0;
     const ONE = 1;
@@ -40,7 +40,7 @@ class LolEnum extends Enum
 
 }
 
-$enum = new LolEnum();
+$enum = new EnumTest();
 
 try {
     var_dump($enum->getValue()); // Will throw an exception
@@ -48,7 +48,7 @@ try {
     echo $e->getMessage() . PHP_EOL;
 }
 
-$enum->setValue(LolEnum::TWO);
+$enum->setValue(EnumTest::TWO);
 var_dump($enum->getValue());
 
 try {

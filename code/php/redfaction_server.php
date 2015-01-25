@@ -6,12 +6,12 @@
 
 function printLog($msg)
 {
-    echo "[" . date('H:i:s') . "] " . $msg . "\r\n";
+    echo "[" . date('H:i:s') . "] $msg\r\n";
 }
 
 function cString($string)
 {
-    return $string . "\0";
+    return "$string\0";
 }
 
 define('DGRAM_TRACKER_ANNOUNCE', 0);
@@ -71,18 +71,18 @@ for (;;) {
     if ($time < time()) {
         printLog("Tracker Update");
         $time = time() + 100;
-        socket_sendto($sock, $packets[0], strlen($packets[0]), 0, $configArray['tracker']['address'], $configArray['tracker']['port']);
+        socket_sendto($sock, $packets[DGRAM_TRACKER_ANNOUNCE], strlen($packets[DGRAM_TRACKER_ANNOUNCE]), 0, $configArray['tracker']['address'], $configArray['tracker']['port']);
     }
 
     if (socket_recvfrom($sock, $buf, 2 ** 16, 0, $from, $port) !== false) {
-        if ($buf == $packets[1]) {
-            printLog("<" . $from . "> Client Query");
-            socket_sendto($sock, $packets[2], strlen($packets[2]), 0, $from, $port);
+        if ($buf == $packets[DGRAM_CLIENT_QUERY]) {
+            printLog("<$from> Client Query");
+            socket_sendto($sock, $packets[DGRAM_SERVER_DESCRIBE], strlen($packets[DGRAM_SERVER_DESCRIBE]), 0, $from, $port);
         }
 
         if (substr($buf, 0, 2) == $packets[3]) {
-            printLog("<" . $from . "> Client Join - " . strtok(substr($buf, 5), '\x00'));
-            socket_sendto($sock, $packets[4], strlen($packets[4]), 0, $from, $port);
+            printLog("<$from> Client Join - " . strtok(substr($buf, 5), "\x00"));
+            socket_sendto($sock, $packets[DGRAM_SERVER_MAP], strlen($packets[DGRAM_SERVER_MAP]), 0, $from, $port);
         }
     }
 

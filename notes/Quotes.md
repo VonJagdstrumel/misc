@@ -1,3 +1,38 @@
+> _Je veux oublier ces moments douloureux déjà lointains. Je me demande chaque jour si tel est le cas. Je ne fais que m'en souvenir un peu plus._  
+— Steve A. Forget
+
+---
+
+> _Qu'un événement se résout à être un malheur, c'est la vie...  
+Qu'un malheur apporte du chagrin, c'est humain...  
+Qu'un chagrin amène une femme, c'est un guet-apens._  
+— Steve A. Forget
+
+---
+
+> _La finalité du capitalisme, c'est plus d'argent pour personne._  
+— Bernard Goddammit
+
+---
+
+> _Soldes d'Halloween, soldes de Thanksgiving, soldes de Noël, soldes du Nouvel An, soldes d’Épiphanie, soldes de Pâques, soldes de Printemps, soldes d’Été, soldes d'Automne, soldes d'Hiver, soldes d'Anniversaire Steam, soldes de l'Ascension, soldes de l'Oktoberfest, soldes du Roch Hachana, soldes du Ramadan, soldes du Losar, soldes de l'Anniversaire de la mort de Kennedy, soldes du G20, soldes de Tchernobyl... Valve maîtrise bien le truc maintenant._  
+— Steve A. Forget
+
+---
+
+> _Bits, strings, queues, jarretières, bourrage et insertion, petit/grand bout, sleep, array, tampons, chaînes, débordements, soumettre et enfiler... Mon vocabulaire professionnel classique et commun. Imaginez maintenant les tournures de phrases à l'oral et la réaction des auditeurs extérieurs à la discussion._  
+— Steve A. Forget
+
+---
+
+> _C'est un truc Français, on a un terme très politique pour ça: «Principe de précaution».  
+On a peur de chier bleu à cause des OGM? Interdit.  
+On a peur de pouvoir, un jour, cloner Mitterand? Interdit.  
+On a peur de se faire scanner les fesses à cause du NFC? Interdit._  
+— Steve A. Forget
+
+---
+
 > _Ugly problems often require ugly solutions. Solving an ugly problem in a pure manner is bloody hard._  
 — Rasmus Lerdorf
 

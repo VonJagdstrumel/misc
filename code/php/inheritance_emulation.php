@@ -81,20 +81,3 @@ var_dump($o->bar);
 
 // On regarde ce qui se passe dans la bête
 var_dump($o);
-
-/*
- * string(14) "daFunction: 79"
- * string(20) "instanceFunction: 42"
- * string(18) "staticFunction: 71"
- * int(16)
- * int(27)
- * object(Two)#2 (2) {
- *   ["instanceParentClass"]=>
- *   object(One)#1 (1) {
- *     ["bar"]=>
- *     int(27)
- *   }
- *   ["foo"]=>
- *   int(16)
- * }
- */
