@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Permet d'extraire l'historique de jeu d'une partie de Game Dev Tycoon.
+ * Extracts game history from a Game Dev Tycoon save
  */
 
 function weekToDate($weeks)
