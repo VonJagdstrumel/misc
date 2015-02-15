@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Émulation d'un serveur Red Faction minimal
+ * Red Faction minimal server implementation
  */
 
 function printLog($msg)

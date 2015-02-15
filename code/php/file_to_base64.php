@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Transforme un fichier en conteneur base64.
+ * File to base64 container transformation
  */
 
 $file = @$argv[1] ? : exit;

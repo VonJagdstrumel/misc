@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Émulation d'héritage par composition.
+ * Inheritance by composition emulation
  * PHP >= 5.6
  */
 

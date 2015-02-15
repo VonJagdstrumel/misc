@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Permet de générer des résultats de tests arbitraires sur speedtest.net
+ * Generate custom tailored test summaries from speedtest.net
  */
 
 $dlSpeed = @$argv[1] ? : exit;

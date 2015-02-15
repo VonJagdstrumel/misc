@@ -1,8 +1,8 @@
 <?php
 
 /*
- * Émulation d'une structure Enum.
- * Préférer l'usage de http://fr2.php.net/manual/en/class.splenum.php
+ * Enum structure emulation
+ * Prefer the use of http://fr2.php.net/manual/en/class.splenum.php
  */
 
 abstract class Enum

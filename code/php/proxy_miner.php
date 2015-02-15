@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Permet de récupérer des listes de proxies à partir de www.xroxy.com et www.samair.ru
+ * Proxy list aggregator from www.xroxy.com and www.samair.ru
  */
 
 for ($i = 0; $i < 220; ++$i) {

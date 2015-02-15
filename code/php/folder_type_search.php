@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Analyse une arborescence à la recherche de dossiers de type personnalisé
+ * Analyze a directory tree in order to find custom directories
  */
 
 $path = @$argv[1] ? : '.';

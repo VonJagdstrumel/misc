@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Permet de patcher un fichier Portable Executable et de switcher du GUI à CUI et vice-versa.
+ * Patch Portable Executable files and switch from GUI to CUI and vice versa.
  */
 
 $file = @$argv[1] ? : exit;

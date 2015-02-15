@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Limitation de débit pour téléchargement d'un fichier.
+ * Apply throttle on the download of a file
  */
 
 // YOU CAN TOUCH THIS SHIT
