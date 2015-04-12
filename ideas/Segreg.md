@@ -8,9 +8,9 @@ Consiste en un réseau maillé de systèmes permettant de recenser, surveiller, 
 
 #### Noyau ####
 
-Permet à une machine compatible avec cette architecture d'annoncer sa présence sur un réseau restreint grace à des datagrammes UDP multicast. Les autres pairs répondent à leur tour dans ce même but mais avec des datagrammes UDP unicast.
+Permet à une machine compatible avec cette architecture d'annoncer sa présence sur un réseau restreint grâce à des datagrammes UDP multicast. Les autres pairs répondent à leur tour dans ce même but mais avec des datagrammes UDP unicast.
 
-Les pairs sont repertoriés en mémoire dans une CuncurrentHashMap maintenue à jour à l'aide de timeout et de relance de datagrammes.
+Les pairs sont répertoriés en mémoire dans une CuncurrentHashMap maintenue à jour à l'aide de timeout et de relance de datagrammes.
 
 Un flux TCP local permet à segregd de récupérer la liste des pairs depuis la Map.
 
@@ -18,9 +18,9 @@ L'ensemble des communications applicatives se font au format JSON.
 
 #### Extension possible ####
 
-Ne plus simplement lister les pairs disponibles sur le réseau. Echanger les services disponibles en même temps qu'indiquer la présence des pairs. Centraliser en utilisant la capacité native d'échange d'information régulier, cohérent et centralisé de protond.
+Ne plus simplement lister les pairs disponibles sur le réseau. Échanger les services disponibles en même temps qu'indiquer la présence des pairs. Centraliser en utilisant la capacité native d'échange d'information régulier, cohérent et centralisé de protond.
 
-### Service d'aggrégation - segregd ###
+### Service d'agrégation - segregd ###
 
 #### Noyau ####
 
@@ -41,11 +41,11 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 	* User/Group
 	* Nice/Priorité
 	* Répertoire de travail
-	* Commande d'execution
+	* Commande d'exécution
 * Stop/Restart
 * Affichage et modification de la configuration
 * Accès aux logs
-* Récapitulatif des servers
+* Récapitulatif des serveurs
 * Ports ouverts
 * Annuaire des webservices
 * Modules activés
@@ -53,13 +53,6 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 ##### MySQL/PostgreSQL #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Affichage et modification de la configuration
 * Stop/Restart
 * Accès Adminer
@@ -70,13 +63,6 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 ##### Named/BIND #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Accès aux logs
 * Ports ouverts
 * Récapitulatif des zones
@@ -86,13 +72,6 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 ##### Postfix #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
 * Affichage et modification de la configuration
 * Accès aux logs
@@ -101,13 +80,6 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 ##### BTSync/Syncthing #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
 * Affichage et modification du fichier de configuration
 * Accès aux logs
@@ -132,16 +104,9 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 * Shell
 * Liste (et modification?) des règles netfilter
 
-##### µTorrent #####
+##### µTorrent/Transmission #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
 * Affichage et modification du fichier de configuration
 * Accès WebUI
@@ -152,29 +117,15 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 ##### FreeLan/OpenVPN #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
 * Affichage et modification de la configuration
 * Ports ouverts
 * Accès aux logs
-* Recapitulatif des liaisons
+* Récapitulatif des liens
 
 ##### Polipo/Privoxy #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
 * Affichage et modification de la configuration
 * Ports ouverts
@@ -183,13 +134,6 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 ##### Tor #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
 * Affichage et modification de la configuration
 * Ports ouverts
@@ -199,13 +143,6 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 ##### NTP #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
 * Affichage et modification de la configuration
 * Ports ouvers
@@ -215,13 +152,6 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 ##### SSH #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
 * Affichage et modification de la configuration
 * Ports ouverts
@@ -231,33 +161,27 @@ La configuration de l'architecture se fera via la persistance en base de donnée
 ##### FTP #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
 * Affichage et modification de la configuration
 * Ports ouverts
 * Accès aux logs
 * Gestion des utilisateurs
-* Gestion des repertoires
+* Gestion des répertoires
 
 ##### DHCP #####
 
 * Affichage des informations du processus
-	* PID
-	* Uptime
-	* Memory usage
-	* User/Group
-	* Nice/Priorité
-	* Répertoire de travail
-	* Commande d'execution
 * Stop/Restart
-* Affichage et modification de ma configuration
+* Affichage et modification de la configuration
 * Ports ouverts
 * Accès aux logs
 * Gestion des subnet
 * Liste des baux
+
+##### Prosody/Ejabberd #####
+
+* Affichage des informations du processus
+* Stop/Restart
+* Affichage et modification de la configuration
+* Ports ouverts
+* Accès aux logs
