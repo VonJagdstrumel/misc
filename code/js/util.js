@@ -1,23 +1,60 @@
-function ord(x) {
-    return x.charCodeAt(0);
-}
+Math.seed = 824;
 
-function chr(x) {
-    return String.fromCharCode(x);
-}
+/**
+ * Générateur de nombres aléatoires seedable
+ * @param {Number} min
+ * @param {Number} max
+ * @returns {Number}
+ */
+Math.seededRandom = function (min, max) {
+    max = max || 1;
+    min = min || 0;
+    Math.seed = (Math.seed * 9301 + 49297) % 233280;
+    var rnd = Math.seed / 233280;
+    return min + rnd * (max - min);
+};
 
-function htmlentities(str) {
+/**
+ * Retire une portion de la chine de caractères et met en majuscule la première lettre
+ * @param {String} regex
+ * @returns {String}
+ */
+String.prototype.truncateText = function (regex) {
+    regex = regex || '';
+    var tmp = this.replace(new RegExp(regex), '');
+    return tmp.charAt(0).toUpperCase() + tmp.slice(1);
+};
+
+/**
+ * Conversion de degrés en radians
+ * @param {Number} degrees
+ * @returns {Number}
+ */
+Math.radians = function (degrees) {
+    return degrees * Math.PI / 180;
+};
+
+/**
+ * Transforme les caractères spéciaux HTML en leurs entités
+ * @returns {String}
+ */
+String.prototype.htmlEntities = function () {
     var tagsToReplace = {
         '&': '&amp;',
         '<': '&lt;',
         '>': '&gt;'
     };
 
-    return str.replace(/([&<>])/g, function (match) {
+    return this.replace(/([&<>])/g, function (match) {
         return tagsToReplace[match];
     });
-}
+};
 
-function getElementByXpath(path) {
-    return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-}
+/**
+ * Récupère le premier élement
+ * @param {String} path
+ * @returns {Element}
+ */
+Document.prototype.getElementByXpath = function (path) {
+    return this.evaluate(path, this, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+};
