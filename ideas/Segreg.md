@@ -16,6 +16,8 @@ Un flux TCP local permet à segregd de récupérer la liste des pairs depuis la 
 
 L'ensemble des communications applicatives se font au format JSON.
 
+A étudier: déployer un noeud Syncthing sur chaque machine faisant partie du réseau et exploiter son mécanisme de discovery. Résout la problématique d'une implémentation sous Android.
+
 #### Extension possible ####
 
 Ne plus simplement lister les pairs disponibles sur le réseau. Échanger les services disponibles en même temps qu'indiquer la présence des pairs. Centraliser en utilisant la capacité native d'échange d'information régulier, cohérent et centralisé de protond.
