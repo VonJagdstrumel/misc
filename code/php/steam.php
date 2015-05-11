@@ -97,9 +97,9 @@ usort($data->response->games, 'compareByName');
             foreach ($data->response->games as $entry):
                 ?>
                 <li><a href="http://store.steampowered.com/app/<?= $entry->appid ?>">
-                    <div class="logo"><img src="<?= !empty($entry->img_logo_url) ? "http://media.steampowered.com/steamcommunity/public/images/apps/{$entry->appid}/{$entry->img_logo_url}.jpg" : 'http://image.noelshack.com/fichiers/2014/27/1404413805-trollface.png' ?>" alt="<?= $entry->name ?>"></div>
-                    <div class="name"><?= $entry->name ?></div>
-                </a></li>
+                        <div class="logo"><img src="<?= !empty($entry->img_logo_url) ? "http://media.steampowered.com/steamcommunity/public/images/apps/{$entry->appid}/{$entry->img_logo_url}.jpg" : 'http://image.noelshack.com/fichiers/2014/27/1404413805-trollface.png' ?>" alt="<?= $entry->name ?>"></div>
+                        <div class="name"><?= $entry->name ?></div>
+                    </a></li>
                 <?php
             endforeach;
             ?>

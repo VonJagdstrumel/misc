@@ -30,4 +30,4 @@ foreach ($_GET as $getKey => $getValue) {
     $trackerUrlParts[] = rawurlencode($getKey) . '=' . rawurlencode($getValue);
 }
 
-echo file_get_contents($trackerUrl . implode('&', $trackerUrlParts), false, stream_context_create($opts));
+print file_get_contents($trackerUrl . implode('&', $trackerUrlParts), false, stream_context_create($opts));

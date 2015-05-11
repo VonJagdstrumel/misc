@@ -61,7 +61,7 @@ class Two
     }
 }
 
-// Notre objet vers lequel on va relayer les opÃ©rations
+// Notre objet vers lequel on va relayer les opérations
 $instance = new One();
 
 // Notre objet de relai
@@ -79,5 +79,5 @@ $o->bar = 27;
 var_dump($o->foo);
 var_dump($o->bar);
 
-// On regarde ce qui se passe dans la bÃªte
+// On regarde ce qui se passe dans la bête
 var_dump($o);
