@@ -9,18 +9,18 @@ $directory = new RecursiveDirectoryIterator($path);
 $iterator = new RecursiveIteratorIterator($directory);
 $regex = new RegexIterator($iterator, '/^.+desktop\.ini$/i', RecursiveRegexIterator::GET_MATCH);
 
-for($regex as $item) {
+foreach ($regex as $item) {
     $fileContent = file_get_contents($item[0]);
-    $encoding = mb_detect_encoding($fileContent) ?: 'UCS-2LE';
+    $encoding = mb_detect_encoding($fileContent) ? : 'UCS-2LE';
 
-    if($encoding == 'UCS-2LE') {
+    if ($encoding == 'UCS-2LE') {
         $fileContent = substr($fileContent, 2);
     }
 
-    $fileContent = mb_convert_encoding($fileContent, 'UTF-8', $encoding);
-    $fileContent = @parse_ini_string($fileContent);
+    $decodedFileContent = mb_convert_encoding($fileContent, 'UTF-8', $encoding);
+    $iniContent = parse_ini_string($decodedFileContent);
 
-    if(!empty($fileContent['FolderType'])) {
-        print "{$item[0]}: {$fileContent['FolderType']}\n";
+    if (!empty($iniContent['FolderType'])) {
+        printf("%s: %s\n", $item[0], $iniContent['FolderType']);
     }
 }
