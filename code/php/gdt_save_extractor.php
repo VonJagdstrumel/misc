@@ -18,7 +18,26 @@ $engines = $saveStruct->company->engines;
 $games = $saveStruct->company->gameLog;
 $processedGames = [];
 
-echo "GUID;Title;Genre;Second Genre;Topic;Size;Audience;Engine;Hype;Score;Bugs;Initial Rank;Top Rank;Release Date;Costs;Sales;Amount Sold;New Fans\r\n"; //
+fputcsv(STDOUT, [
+    'GUID',
+    'Title',
+    'Genre',
+    'Second Genre',
+    'Topic',
+    'Size',
+    'Audience',
+    'Engine',
+    'Hype',
+    'Score',
+    'Bugs',
+    'Initial Rank',
+    'Top Rank',
+    'Release Date',
+    'Costs',
+    'Sales',
+    'Amount Sold',
+    'New Fans'
+]);
 
 foreach ($games as $id => $game) {
     $processedGames[$id] = [];
@@ -40,5 +59,5 @@ foreach ($games as $id => $game) {
     $processedGames[$id]['totalSales'] = round($game->totalSales);
     $processedGames[$id]['amountSold'] = round($game->amountSold);
     $processedGames[$id]['fansChanged'] = round($game->fansChanged);
-    echo implode(';', $processedGames[$id]) . "\r\n"; //
+    fputcsv(STDOUT, $processedGames[$id]);
 }
