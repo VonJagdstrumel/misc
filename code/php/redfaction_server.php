@@ -6,7 +6,7 @@
 
 function printLog($msg)
 {
-    echo "[" . date('H:i:s') . "] $msg\r\n";
+    printf("[%s] %s\n", date('H:i:s'), $msg);
 }
 
 function cString($string)
