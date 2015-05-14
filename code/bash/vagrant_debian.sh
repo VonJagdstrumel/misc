@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Allow password authentication, disable reverse dns lookup, remove motd and restart ssh
 sed -i -r 's/^#?PasswordAuthentication (yes|no)$/PasswordAuthentication yes/' /etc/ssh/sshd_config
 echo '' >> /etc/ssh/sshd_config
