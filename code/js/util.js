@@ -15,7 +15,7 @@ Math.seededRandom = function (min, max) {
 };
 
 /**
- * Retire une portion de la chine de caractères et met en majuscule la première lettre
+ * Retire une portion de la chaine de caractères et met en majuscule la première lettre
  * @param {String} regex
  * @returns {String}
  */
@@ -44,17 +44,30 @@ String.prototype.htmlEntities = function () {
         '<': '&lt;',
         '>': '&gt;'
     };
-
     return this.replace(/([&<>])/g, function (match) {
         return tagsToReplace[match];
     });
 };
 
 /**
- * Récupère le premier élement
+ * Récupère le premier noeud
  * @param {String} path
  * @returns {Element}
  */
-Document.prototype.getElementByXpath = function (path) {
-    return this.evaluate(path, this, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+Node.prototype.getFirstNodeByXpath = function (path) {
+    return document.evaluate(path, this, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+};
+
+/**
+ * Récupère une liste de noeuds
+ * @param {String} path
+ * @returns {Array}
+ */
+Node.prototype.getNodeListByXpath = function (path) {
+    var snapshot = document.evaluate(path, this, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    var elementList = [];
+    for (var i = 0; i < snapshot.snapshotLength; ++i) {
+        elementList.push(snapshot.snapshotItem(i));
+    }
+    return elementList;
 };
