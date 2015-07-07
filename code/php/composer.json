@@ -1,0 +1,24 @@
+{
+    "homepage": "http://www.behindtheshell.fr/",
+    "licence": "MIT",
+    "authors": [
+        {
+            "name": "Steve Forget",
+            "homepage": "http://www.behindtheshell.fr/",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/VonJagdstrumel/libutil.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "vonjagdstrumel/libutil": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.7"
+    }
+}
