@@ -6,20 +6,18 @@
 
 $file = @$argv[1] ? : exit;
 
-$fh = fopen($file, 'r+b');
-flock($fh, LOCK_SH);
+$fh = new \SplFileObject($file, 'r+b');
+$fh->flock(LOCK_EX);
 
-fseek($fh, 0x3c);
-$startPos = current(unpack('l', fread($fh, 4))) + 0x5c;
+$fh->fseek(0x3c);
+$startPos = current(unpack('l', $fh->fread(4))) + 0x5c;
 
-fseek($fh, $startPos);
-$subsystem = current(unpack('l', fread($fh, 4)));
+$fh->fseek($startPos);
+$subsystem = current(unpack('l', $fh->fread(4)));
 
-$subsystem = in_array($subsystem, array(2, 3)) ?
-    ($subsystem - 1) % 2 + 2 :
-    $subsystem;
+if (in_array($subsystem, array(2, 3))) {
+    $subsystem = ($subsystem - 1) % 2 + 2;
+}
 
-fseek($fh, $startPos);
-fwrite($fh, pack('l', $subsystem));
-
-fclose($fh);
+$fh->fseek($startPos);
+$fh->fwrite(pack('l', $subsystem));

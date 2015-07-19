@@ -2,6 +2,7 @@
 
 /*
  * Red Faction minimal server implementation
+ * Announce to tracker and reply to client's queries
  */
 
 function printLog($msg)

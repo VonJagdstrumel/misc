@@ -2,8 +2,7 @@
 
 /*
  * List all the games from a public Steam account using SteamAPI
- * Set up SteamAPI key
- * Call with 'steamId' GET parameter
+ * Set up SteamAPI key and call with 'steamId' GET parameter
  */
 
 function compareByName($a, $b)
@@ -11,7 +10,7 @@ function compareByName($a, $b)
     return strcmp($a->name, $b->name);
 }
 
-$steamApiKey = '';
+$steamApiKey = '' ?: exit;
 $steamId = !empty($_GET['steamId']) ? $_GET['steamId'] : exit;
 $dataWrapper = json_decode(file_get_contents("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=$steamApiKey&steamid=$steamId&include_appinfo=1"));
 usort($data->response->games, 'compareByName');

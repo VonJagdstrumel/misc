@@ -2,13 +2,14 @@
 
 /*
  * Resample a batch of wallpapers
+ * Requires nconvert (http://www.xnview.com/fr/nconvert/)
  */
 
 $screenWidth = @$argv[1] ? : exit;
-$screenHeight = @$argv[2]? : exit;
+$screenHeight = @$argv[2] ? : exit;
 
-$directoryIterator = new DirectoryIterator('In');
-$outDir = 'Out';
+$directoryIterator = new DirectoryIterator('in');
+$outDir = 'out';
 
 if (!is_dir($outDir)) {
     mkdir($outDir);

@@ -24,7 +24,6 @@ foreach ($_GET as $getKey => $getValue) {
         case 'peer_id':
             $getValue = preg_replace('/^-[^-]+/', '-UT2110', $getValue);
             break;
-        default:
     }
 
     $trackerUrlParts[] = rawurlencode($getKey) . '=' . rawurlencode($getValue);

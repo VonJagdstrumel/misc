@@ -1,10 +1,11 @@
 <?php
 
 /*
- * File to base64 container transformation
+ * File to base64 data URI transformation
  */
 
 $file = @$argv[1] ? : exit;
-$mimeType = str_replace(str_split(" \t\n\r\0\x0B"), '', finfo_file(finfo_open(FILEINFO_MIME), $file));
+$fileInfo = finfo_file(finfo_open(FILEINFO_MIME), $file);
+$mimeType = str_replace(' ', '', $fileInfo);
 $encodedData = base64_encode(file_get_contents($file));
 printf("data:%s;base64,%s\n", $mimeType, $encodedData);
