@@ -14,9 +14,9 @@ case "$1" in
         cd binaries/nginx
         ./nginx -s quit
         cd ../..
-        /bin/kill -f -TERM $(cat .pid)
+        /bin/kill -f $(cat .pid)
         rm .pid
-        /bin/kill -f -TERM $(cat binaries/mariadb/data/$(uname -n).pid)
+        /bin/kill -f $(cat binaries/mariadb/data/$(uname -n).pid)
         ;;
     restart)
         stop && start
