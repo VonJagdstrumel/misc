@@ -125,5 +125,7 @@ find binaries -name *.pdb -type f -delete
 find binaries -name *.lib -type f -delete
 
 # Fix NTFS permissions
-takeown /f . /r
-icacls . /reset /T
+if [[ $OSTYPE = cygwin ]]
+    takeown /f . /r
+    icacls . /reset /t
+fi
