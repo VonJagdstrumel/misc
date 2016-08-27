@@ -1,0 +1,37 @@
+Mécanisme de signature bilatérale des transactions bancaires commerciales.
+
+On considère 3 agents:
+- Le débiteur (client)
+- Le créditeur (commerçant)
+- L'établissement bancaire
+
+Le principe ici est de fournir un moyen simple, à la fois logiciel et matériel, permettant le traitement de transactions bancaires entre le débiteur et le créditeur.
+
+Ces échanges reposent sur des méthodes cryptanalitiques permettant ainsi:
+- D'authentifier les agents par les signatures apposées sur la transaction;
+- De rendre infalsifiable les ordres de transactions;
+- D'empecher toute fraude par vol de coordonnées bancaires;
+- De chiffrer les échanges afin de garantir le respect de la vie privée.
+
+De façon très synthétique, le déroulement d'une transaction se déroule ainsi:
+
+- Le débiteur valide un échange commercial auprès du créditeur qui fixera le prix de la trnsaction
+- Le créditeur va produire un ordre de transaction bancaire établit dans un format standard
+- Cet ordre de transaction sera signé avec la clé privée du créditeur
+- Le créditeur transmet l'ordre de transaction signé au client auquel il aura préalablement joint la clé publique associée
+- Le débiteur recoit l'ordre de transaction signé avec la clé publique, valide la signature et vérifie le montant de la transaction bancaire
+- Le débiteur va apposer à son tour sa signature sur le message signé, celle-ci s'effectuera avec sa clé privée
+- Le message doublement signé est maintenant transmis à l'établissement bancaire avec les clés publiques du créditeur et du débiteur
+- L'établissement bancaire récupère la transaction doublement signée et les deux clés publiques et vérifie les signatures de la transaction
+- Dans le cas où les signatures sont valides, l'établissement bancaire effectue le virement au sein du système bancaire
+
+Le commerçant crée un ordre de transaction et y fixe le montant
+Hanshake SSL/TLS entre client et commerçant (Le client possède le certificat du commerçant et les clés secrètes sont échangées)
+Le commerçant va signer la transaction avec sa clé privée, la chiffre et l'envoie au client
+Le client vient valider la transaction avec le certificat du commerçant
+Le client vérifie le montant de la transaction
+Handshake SSL/TLS entre client et banque (La banque possède le certificat du client et les clés secrètes sont échangées)
+Le client va signer la transaction avec sa clé privée, la chiffre et l'envoie à la banque
+La banque vient valider la transaction avec le certificat du client
+La banque identifie les comptes à débiter et à créditer en retrouvant les IBAN associés aux certificats au sein de leurs bases de données
+La banque execute la transaction en interne
