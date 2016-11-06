@@ -21,9 +21,9 @@ foreach ($directoryIterator as $fileEntry) {
         $imageSize = getimagesize($imagePath);
 
         if ($imageSize[0] / $imageSize[1] > 16 / 9) {
-            print "nconvert -out jpeg -o $outDir\%%.jpg -ratio -resize 0 $screenHeight -canvas $screenWidth $screenHeight center \"$imagePath\"\n";
+            print "nconvert -out jpeg -o $outDir\%.jpg -ratio -resize 0 $screenHeight -canvas $screenWidth $screenHeight center \"$imagePath\"\n";
         } else {
-            print "nconvert -out jpeg -o $outDir\%%.jpg -ratio -resize $screenWidth 0 -canvas $screenWidth $screenHeight center \"$imagePath\"\n";
+            print "nconvert -out jpeg -o $outDir\%.jpg -ratio -resize $screenWidth 0 -canvas $screenWidth $screenHeight center \"$imagePath\"\n";
         }
     }
 }
