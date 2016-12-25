@@ -24,15 +24,8 @@ switch ($fromTo[0]) {
         exit(1);
 }
 
-switch ($fromTo[1]) {
-    case 'b':
-    case 'd':
-    case 'o':
-    case 'x':
-        $format = "%{$fromTo[1]}";
-        break;
-    default:
-        exit(1);
+if(strstr('bdox', $fromTo[1]) === false) {
+	exit(1);
 }
 
-printf($format, $value);
+printf("%{$fromTo[1]}\n", $value);
