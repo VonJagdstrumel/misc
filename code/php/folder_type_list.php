@@ -21,6 +21,6 @@ foreach ($regex as $item) {
     $iniContent = parse_ini_string($decodedFileContent);
 
     if (!empty($iniContent['FolderType'])) {
-        printf("%s: %s\n", $item[0], $iniContent['FolderType']);
+		echo "{$item[0]}: {$iniContent['FolderType']}\n";
     }
 }

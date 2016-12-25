@@ -9,7 +9,7 @@ for ($i = 0; $i < 220; ++$i) {
     preg_match_all('/&host=([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})&port=([0-9]{1,5})&/', $pageContent, $proxies, PREG_SET_ORDER);
 
     foreach ($proxies as $proxy) {
-        printf("%s:%s\n", $proxy[1], $proxy[2]);
+        echo "{$proxy[1]}:{$proxy[2]}\n";
     }
 }
 
@@ -18,6 +18,6 @@ for ($i = 1; $i < 16; ++$i) {
     preg_match_all('/([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}:[0-9]{1,5}) /', $pageContent, $proxies, PREG_SET_ORDER);
 
     foreach ($proxies as $proxy) {
-        printf("%s\n", $proxy[1]);
+        echo "{$proxy[1]}\n";
     }
 }
