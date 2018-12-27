@@ -1,0 +1,42 @@
+TARGET     = warp
+STATIC     = lib$(TARGET).a
+
+CC         = gcc -c -std=c11 -Wall -I. -pedantic -O2 -o
+LINKER     = gcc -Wall -I. -s -o
+AR         = ar crs
+RC         = windres
+UPX        = upx -q
+
+SRCDIR     = src
+OBJDIR     = build
+BINDIR     = bin
+
+SOURCES    := $(wildcard $(SRCDIR)/*.c)
+SRCOBJS    := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.c.o)
+RESOURCES  := $(wildcard $(SRCDIR)/*.rc)
+RESOBJS    := $(RESOURCES:$(SRCDIR)/%.rc=$(OBJDIR)/%.rc.o)
+OBJECTS    := $(SRCOBJS)
+OBJECTS    += $(RESOBJS)
+
+$(BINDIR)/$(STATIC): $(OBJECTS)
+	$(AR) $@ $(OBJECTS)
+
+$(BINDIR)/$(TARGET): $(OBJECTS)
+	$(LINKER) $@ $(OBJECTS)
+	$(UPX) $@
+
+$(SRCOBJS): $(SOURCES) mkdir
+	$(CC) $@ $<
+
+$(RESOBJS): $(RESOURCES) mkdir
+	$(RC) $< $@
+
+.PHONY: clean
+clean:
+	@$(RM) $(OBJDIR)/*
+	@$(RM) $(BINDIR)/*
+
+.PHONY: mkdir
+mkdir:
+	@mkdir -p $(OBJDIR)
+	@mkdir -p $(BINDIR)
