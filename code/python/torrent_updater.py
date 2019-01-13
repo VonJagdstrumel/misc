@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 
-import bencode, sys, os, re
+import sys
+import os
+import re
+
+import bencode
 
 
 def build_tracker_list():
     new_list = []
-    valid_list = ''''''
+    valid_list = """"""
 
     for i in valid_list.split('\n'):
         new_list.append([i])

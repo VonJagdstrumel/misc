@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-import requests, sys
+import sys
+
+import requests
 
 playlist_id = sys.argv[1]
 api_key = sys.argv[2]

@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
-import bencode, sys, re
+import sys
+import re
+
+import bencode
 
 content = sys.stdin.buffer.read()
 torrent = bencode.decode(content)

@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 
-import bencode, sys, socket, struct, requests
+import sys
+import socket
+import struct
+
 from concurrent import futures
 from urllib import parse
+
+import bencode
+import requests
 
 BT_UDP_PROT_ID_H = 0x417
 BT_UDP_PROT_ID_L = 0x27101980

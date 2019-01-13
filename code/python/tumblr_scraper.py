@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
-import sys, re, os, json
+import sys
+import re
+import os
+import json
+
 from concurrent import futures
 from urllib import request
 

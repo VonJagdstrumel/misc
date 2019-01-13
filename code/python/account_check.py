@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
-import requests, time, sys
+import time
+import sys
+
+import requests
 
 for account in sys.stdin:
     account = account.strip()
