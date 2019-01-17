@@ -11,15 +11,8 @@ for account in sys.stdin:
     if not account:
         continue
 
-    if account.find('@') > -1:
-        time.sleep(1.5)
-        r = requests.get('https://haveibeenpwned.com/api/v2/pasteaccount/' + account)
-
-        if r.status_code == 200:
-            print('https://haveibeenpwned.com/api/v2/pasteaccount/' + account)
-
     time.sleep(1.5)
-    r = requests.get('https://haveibeenpwned.com/api/v2/breachedaccount/' + account)
+    r = requests.get('https://api.haveibeenpwned.com/unifiedsearch/' + account)
 
     if r.status_code == 200:
-        print('https://haveibeenpwned.com/api/v2/breachedaccount/' + account)
+        print('https://api.haveibeenpwned.com/unifiedsearch/' + account)
