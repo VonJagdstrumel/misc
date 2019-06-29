@@ -9,8 +9,8 @@ PACK_SIZE_DEF = { 2: 'h', 4: 'i' }
 def read_size(fh, pos, size):
     fh.seek(pos)
     packed = fh.read(size)
-    unpacked = struct.unpack(PACK_SIZE_DEF[size], packed)
-    return unpacked[0]
+    data, *_ = struct.unpack(PACK_SIZE_DEF[size], packed)
+    return data
 
 
 def write_size(fh, pos, size, data):
