@@ -22,12 +22,17 @@ def fetch_image(post_url, img_list):
         request.urlretrieve(img_url, file_path)
 
 
-future_list = []
-pool = futures.ThreadPoolExecutor()
-json_obj = json.load(sys.stdin)
+def process(data_json):
+    future_list = []
+    pool = futures.ThreadPoolExecutor()
+    json_obj = json.load(data_json)
 
-for url in json_obj:
-    future = pool.submit(fetch_image, url, json_obj[url])
-    future_list.append(future)
+    for url in json_obj:
+        future = pool.submit(fetch_image, url, json_obj[url])
+        future_list.append(future)
 
-futures.wait(future_list)
+    futures.wait(future_list)
+
+
+if __name__ == '__main__':
+    process(sys.stdin)

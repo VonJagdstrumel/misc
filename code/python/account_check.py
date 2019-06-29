@@ -5,14 +5,24 @@ import sys
 
 import requests
 
-for account in sys.stdin:
-    account = account.strip()
 
-    if not account:
-        continue
+def process(data_list):
+    res = ''
 
-    time.sleep(1.5)
-    r = requests.get('https://api.haveibeenpwned.com/unifiedsearch/' + account)
+    for account in data_list:
+        account = account.strip()
 
-    if r.status_code == 200:
-        print('https://api.haveibeenpwned.com/unifiedsearch/' + account)
+        if not account:
+            continue
+
+        time.sleep(1.5)
+        r = requests.get('https://api.haveibeenpwned.com/unifiedsearch/' + account)
+
+        if r.status_code == 200:
+            res += 'https://api.haveibeenpwned.com/unifiedsearch/' + account + '\n'
+
+    return res
+
+
+if __name__ == '__main__':
+    print(process(sys.stdin), end = '')

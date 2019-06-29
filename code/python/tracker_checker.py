@@ -18,7 +18,7 @@ BT_TIMEOUT = 10
 
 
 def tracker_connect(url):
-    resp = requests.get('{}?{}'.format(url, BT_HTTP_QUERY), timeout = BT_TIMEOUT)
+    resp = requests.get(url + '?' + BT_HTTP_QUERY, timeout = BT_TIMEOUT)
 
     if not bencode.decode(resp.content):
         raise ValueError
@@ -54,11 +54,16 @@ def check_tracker(url):
         pass
 
 
-future_list = []
-pool = futures.ThreadPoolExecutor()
+def process(data_list):
+    future_list = []
+    pool = futures.ThreadPoolExecutor()
 
-for line in sys.stdin:
-    future = pool.submit(check_tracker, line.strip())
-    future_list.append(future)
+    for line in data_list:
+        future = pool.submit(check_tracker, line.strip())
+        future_list.append(future)
 
-futures.wait(future_list)
+    futures.wait(future_list)
+
+
+if __name__ == '__main__':
+    process(sys.stdin)

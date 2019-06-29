@@ -6,17 +6,27 @@ import hashlib
 
 import requests
 
-for password in sys.stdin:
-    password = password.strip()
 
-    if not password:
-        continue
+def process(data_list):
+    res = ''
 
-    full_hash = hashlib.sha1(password.encode()).hexdigest()
-    hash_suffix = full_hash[5:40].upper()
+    for password in data_list:
+        password = password.strip()
 
-    time.sleep(1.5)
-    r = requests.get('https://api.pwnedpasswords.com/range/' + full_hash[0:5])
+        if not password:
+            continue
 
-    if r.text.find(hash_suffix) > 0:
-        print(password)
+        full_hash = hashlib.sha1(password.encode()).hexdigest()
+        hash_suffix = full_hash[5:40].upper()
+
+        time.sleep(1.5)
+        r = requests.get('https://api.pwnedpasswords.com/range/' + full_hash[0:5])
+
+        if r.text.find(hash_suffix) > 0:
+            res += password + '\n'
+
+    return res
+
+
+if __name__ == '__main__':
+    print(process(sys.stdin), end = '')

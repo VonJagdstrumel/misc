@@ -8,6 +8,7 @@ import time
 
 import requests
 
+
 class BaseClient:
     BASE_URL = 'https://mafreebox.freebox.fr'
 
@@ -42,6 +43,7 @@ class BaseClient:
 
 
 class FreeboxOSClient:
+
     def __init__(self, app_token = None):
         self.client = BaseClient()
         self.api_url = self.client.discover()
@@ -161,20 +163,22 @@ class FreeboxOSClient:
 
         return self_rules
 
-# client = FreeboxOSClient()
-# client.register()
-# print(client.app_token)
 
-client = FreeboxOSClient('blahblah')
-client.session()
+if __name__ == '__main__':
+    # client = FreeboxOSClient()
+    # client.register()
+    # print(client.app_token)
 
-connection = client.connection()
-print(connection)
+    client = FreeboxOSClient('blahblah')
+    client.session()
 
-host_count = client.host_count()
-print(host_count)
+    connection = client.connection()
+    print(connection)
 
-self_rules = client.self_forwarding()
-print(self_rules)
+    host_count = client.host_count()
+    print(host_count)
 
-client.logout()
+    self_rules = client.self_forwarding()
+    print(self_rules)
+
+    client.logout()
