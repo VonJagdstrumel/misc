@@ -3,7 +3,7 @@
 import struct
 import sys
 
-PACK_SIZE_DEF = { 2: 'h', 4: 'i' }
+PACK_SIZE_DEF = { 2: 'H', 4: 'I' }
 
 
 def read_size(fh, pos, size):
