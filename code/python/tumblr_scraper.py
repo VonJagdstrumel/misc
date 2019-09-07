@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-import sys
-import re
-import os
 import json
+import os
+import re
+import sys
 
 from concurrent import futures
 from urllib import request
@@ -16,9 +16,9 @@ def fetch_image(post_url, img_list):
     os.makedirs(post_dir, exist_ok = True)
 
     for img_url in img_list:
-        img_url = re.sub(r'_(?:250|400|500|540|640)\.(jpg|png)', r'_1280.\1', img_url)
-        file_name = re.sub(r'.*/', '', img_url)
-        file_path = os.path.join(post_dir, file_name)
+            img_url = re.sub(r'_(?:250|400|500|540|640)\.(jpg|png)', r'_1280.\1', img_url)
+            file_name = re.sub(r'.*/', '', img_url)
+            file_path = os.path.join(post_dir, file_name)
         request.urlretrieve(img_url, file_path)
 
 

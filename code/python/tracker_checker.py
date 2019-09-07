@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import sys
 import socket
 import struct
+import sys
 
 from concurrent import futures
 from urllib import parse
@@ -50,7 +50,7 @@ def check_tracker(url):
             tracker_send(tracker)
 
         print(url)
-    except Exception as e:
+    except Exception:
         pass
 
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import time
 import sys
+import time
 
 import requests
 

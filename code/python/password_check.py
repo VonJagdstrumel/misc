@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import time
-import sys
 import hashlib
+import sys
+import time
 
 import requests
 
