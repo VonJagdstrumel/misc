@@ -16,10 +16,16 @@ def fetch_image(post_url, img_list):
     os.makedirs(post_dir, exist_ok = True)
 
     for img_url in img_list:
+        try:
             img_url = re.sub(r'_(?:250|400|500|540|640)\.(jpg|png)', r'_1280.\1', img_url)
             file_name = re.sub(r'.*/', '', img_url)
             file_path = os.path.join(post_dir, file_name)
-        request.urlretrieve(img_url, file_path)
+
+            if not os.path.isfile(file_path):
+                print(file_path)
+                request.urlretrieve(img_url, file_path)
+        except OSError as e:
+            print(e)
 
 
 def process(data_json):
