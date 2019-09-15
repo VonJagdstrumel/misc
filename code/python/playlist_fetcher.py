@@ -10,7 +10,7 @@ def fetch(playlist_id, api_key):
     next_page = ''
 
     while True:
-        url = 'https://content.googleapis.com/youtube/v3/playlistItems?playlistId={}&maxResults=50&part=snippet&key={}&pageToken={}'.format(playlist_id, api_key, next_page)
+        url = 'https://www.googleapis.com/youtube/v3/playlistItems?playlistId={}&maxResults=50&part=snippet&key={}&pageToken={}'.format(playlist_id, api_key, next_page)
         result = requests.get(url).json()
 
         for item in result['items']:
