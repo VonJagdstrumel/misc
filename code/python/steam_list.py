@@ -2,7 +2,7 @@
 
 import requests
 
-import cygwinreg as winreg
+import cygwinreg3 as winreg
 
 
 def get_app_list():
