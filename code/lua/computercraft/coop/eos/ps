@@ -1,0 +1,18 @@
+local tArgs = { ... }
+if #tArgs ~= 0 then
+    print("Usage: ps")
+    return
+end
+
+string.rpad = function(str, len, char)
+    if char == nil then char = ' ' end
+    return string.rep(char, len - #str) .. str
+end
+
+tList = thread.list()
+nPidWidth = math.floor(math.log10(table.maxn(tList))) + 3
+
+print(string.format("%s  %s", string.rpad("PID", nPidWidth), "CMD"))
+for nPid, sName in pairs(tList) do
+    print(string.format("%" .. nPidWidth .. "d  %s", nPid, sName))
+end

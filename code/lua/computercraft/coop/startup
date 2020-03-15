@@ -1,0 +1,2 @@
+shell.setPath(shell.path() .. ":eos")
+shell.run("thread", "thinshell")

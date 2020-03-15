@@ -1,0 +1,29 @@
+local done = false
+local history = {}
+
+local oldexit = shell.exit
+shell.exit = function()
+    done = true
+end 
+
+while not done do
+	write( shell.dir() .. "> " )
+
+	local line = read(nil, history)
+	table.insert(history, line)
+	
+	local words = {}
+	for match in string.gmatch(line, "[^ \t]+") do
+		table.insert(words, match)
+	end
+
+	local command = words[1]
+	if command then
+		if words[#words] == "&" then
+			thread.spawn(command, shell.run, command, unpack(words, 2, #words - 1))
+		else
+			shell.run(command, unpack(words, 2))
+		end
+	end
+end
+shell.exit = oldexit

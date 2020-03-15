@@ -1,0 +1,7 @@
+local tArgs = { ... }
+if #tArgs ~= 1 then
+    print("Usage: kill <pid>")
+    return
+end
+
+thread.halt(tonumber(tArgs[1]))

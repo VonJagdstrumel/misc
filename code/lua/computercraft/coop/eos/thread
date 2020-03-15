@@ -1,0 +1,227 @@
+--[[
+kazagistar's coroutine based multi-threading (thread)
+v0.7
+Do whatever you want with it, no rights reserved, as per WTFPL
+(http://sam.zoy.org/wtfpl/COPYING)
+
+Runs a program with multiprocessing library 'thread' availible
+Usage: thread (init-program) [args...]
+
+FUNCTIONS:
+thread.spawn(name, func, ...)
+    creates a thread with the given name running the function with the given params
+    returns the thread id (ids may be reused when threads get deleted, be careful)
+thread.halt(id)
+    instantly stops the given thread. This does work in the current thread as well
+thread.setName(id, name)
+thread.findNames(name)
+    returns all the ids matching the given name
+thread.list()
+    returns a table containing all the ids as keys and the names as values
+thread.current()
+    returns id, name of the current thread
+
+OBJECTS:
+thread.drivers
+    This is a table of events and corresponding functions. These functions get called instead
+    the threads when the event occurs. Assigning buggy drivers will crash and halt ALL your
+    threads. If you want to play it safe, just set this = nil to remove access
+    
+EVENTS:
+thread_start id name
+    event occurs whenever a thread is started
+thread_end id name
+    event occurs after a thread ends
+thread_error id name errorMessage
+    event occurs whenever a thread dies with an error message, before the thread_end event
+    if a driver dies, it counts as thread 0
+    
+BUILT IN DRIVERS:
+(These functions are accessed via os.queueEvent(...))
+thread_send id ...
+    sends params as an event only to the thread with the given id 
+    bypasses drivers
+thread_sendall ...
+    sends params as an event to all threads
+    bypasses drivers
+--]]
+assert(not thread, "Only one instance of thread may be running at a time")
+thread = {}
+
+local current = 0 -- current running thread
+local threads = {}
+--[[ Each thread has:
+        thread.thread = the coroutine for the thread
+        thread.filter = the event to listen for, or nil if any
+        thread.name = a string for easier representation
+--]]
+local threadCount = 0
+
+local drivers = {} -- for any event, there can be a listener that responds to it
+thread.drivers = drivers
+
+local halted = {}-- used to delete threads
+
+-- create local copies of internally called functions
+local coroutine_resume = coroutine.resume
+local coroutine_yield = coroutine.yield
+local coroutine_status = coroutine.status
+local coroutine_create = coroutine.create
+local os_queueEvent = os.queueEvent
+local unpack, assert, error, type = unpack, assert, error, type
+
+local function resume(id, event, ...)
+    -- if thread does not exist anymore, then ignore and return
+    if halted[id] then
+        return
+    end
+    
+    local self = threads[id]
+    -- if the thread is listening for a different event, ignore it and return
+    if self.filter ~= nil and self.filter ~= event then
+        return
+    end
+    -- 
+    local previous = current
+    current = id
+    local result, filter = coroutine_resume(self.thread, event, ...)
+    current = previous
+    
+    -- basic error checking
+    if halted[id] then
+        return
+    end
+    if not result then
+        print("error: ",filter)
+        os_queueEvent("thread_error", id, name, filter)
+    end
+    if coroutine_status(self.thread) == "dead" then
+        halted[id] = true
+    else
+        self.filter = filter
+    end
+end
+
+thread.spawn = function(name, func, ...)
+    assert(type(name)=="string", "name must be a string")
+    assert(type(func)=="function", "func must be a function")
+    -- The next empty id is used. This means 2 threads can have the same id, but not at the same time
+    local id = #threads + 1
+    local self = {}
+    self.thread = coroutine_create(func)
+    self.name = name
+    threads[id] = self
+    threadCount = threadCount + 1
+    -- The first run is instant. If your thread creates a thread before exiting, this can cause stack overflows
+    -- this however seems unlikely, and the workaround too complex to be worthwhile
+    resume(id, ...)
+    os_queueEvent("thread_start", id, name)
+    if halted[current] then
+        coroutine_yield()
+    end
+end
+
+thread.halt = function(id)
+    if halted[id] then
+        return
+    end
+    halted[id] = true
+    if id == current then
+        coroutine_yield()
+    end
+end
+
+thread.setName = function(id, name)
+    assert(threads[id] ~= nil, "attempted to rename invalid thread")
+    assert(type(name) == "string", "invalid name")
+    threads[id].name = name
+end
+
+thread.findNames = function(name)
+    local rtrn = {}
+    for id, thr in pairs(threads) do
+        if thr.name == name then
+            rtrn[#rtrn+1] = id
+        end
+    end
+    return unpack(rtrn)
+end
+
+thread.list = function()
+    local rtrn = {}
+    for id, thr in pairs(threads) do
+        rtrn[id] = thr.name
+    end
+    return rtrn
+end
+
+thread.current = function()
+    return current, threads[current].name
+end
+
+--####################################################################--
+-- Basic drivers... more drivers can add or replace these
+-- Driver to allow you to send messages to specific threads
+drivers["thread_send"] = function(event, target, ...)
+    if threads[target] then
+        resume(target, ...)
+        for id in pairs(halted) do
+            threads[id] = nil
+        end
+        halted = {}
+    end
+end
+drivers["thread_sendall"] = function(event, ...)
+    for id in pairs(threads) do
+        resume(id, ...)
+    end
+    for id in pairs(halted) do
+        os_queueEvent("thread_end", id, threads[id].name)
+        threadCount = threadCount - 1
+        threads[id] = nil
+    end
+end
+
+--[[
+local debugThreadEvent = function(event, id, name, err)
+    print("[",threadCount,"] ",event," ",id," ",name," ",err)
+end
+drivers["thread_start"] = debugThreadEvent
+drivers["thread_end"] = debugThreadEvent
+drivers["thread_error"] = debugThreadEvent
+]]--
+
+--####################################################################--
+-- Initialization
+-- create and run the "init" program
+local func = ...
+if type(func) == "function" then
+    thread.spawn("init", func, ...)
+elseif type(func) == "string" then
+    thread.spawn("init", function(...) shell.run(...) end, ...)
+else
+    print("Runs a program with multiprocessing library 'thread' availible")
+    print("Usage: thread (init-program) [args...]")
+    return
+end
+
+while threadCount > 0 do
+    local args = {coroutine_yield()}
+    if drivers[args[1]] ~= nil then
+        success, err = pcall(drivers[args[1]](unpack(args)))
+        if not success then
+            os_queueEvent("thread_error", 0, args[1], err)
+        end
+    else
+        for id in pairs(threads) do
+            resume(id, unpack(args))
+        end
+        for id in pairs(halted) do
+            os_queueEvent("thread_end", id, threads[id].name)
+            threadCount = threadCount - 1
+            threads[id] = nil
+        end
+        halted = {}
+    end
+end
+thread = nil
