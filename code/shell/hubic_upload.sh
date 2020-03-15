@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-path="$1"
-size="$(stat -c%s "$path")"
-expire="$(date +%s%3N)"
-name="$(basename "$path")"
+size=$(stat -c%s "$1")
+expire=$(date +%s%3N)
+name=$(basename "$1")
 
 json="$(curl -s https://hubic.com/home/browser/prepareUpload/ \
     --compressed \
@@ -16,8 +15,8 @@ json="$(curl -s https://hubic.com/home/browser/prepareUpload/ \
     -d redirect= \
     -d "name=$name")"
 
-url="$(perl -MJSON::PP -e '$res = decode_json($ARGV[0]); print $res->{answer}->{hubic}->{url}' -- "$json")"
-signature="$(perl -MJSON::PP -e '$res = decode_json($ARGV[0]); print $res->{answer}->{hubic}->{signature}' -- "$json")"
+url=$(perl -MJSON::PP -e '$res = decode_json($ARGV[0]); print $res->{answer}->{hubic}->{url}' -- "$json")
+signature=$(perl -MJSON::PP -e '$res = decode_json($ARGV[0]); print $res->{answer}->{hubic}->{signature}' -- "$json")
 
 curl "$url/default/" \
     -o /dev/null \
@@ -29,4 +28,4 @@ curl "$url/default/" \
     -F redirect= \
     -F "signature=$signature" \
     -F "name=$name" \
-    -F "file1=@$path"
+    -F "file1=@$1"

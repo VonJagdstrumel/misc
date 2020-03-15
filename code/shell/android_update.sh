@@ -1,23 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Manual android updater with TWRP support
 # Only for Nexus 5 stock images
 
-packageArchive=$(find . -name "hammerhead-*.tgz" -type f)
+packageArchive=$(find . -name 'hammerhead-*.tgz' -type f)
 tar -xzf "$packageArchive"
 
-packageDir=$(find . -name "hammerhead-*" -type d)
+packageDir=$(find . -name 'hammerhead-*' -type d)
 pushd "$packageDir" > /dev/null
 
-imageArchive=$(find . -name "image-hammerhead-*.zip" -type f)
+imageArchive=$(find . -name 'image-hammerhead-*.zip' -type f)
 unzip "$imageArchive"
 
-bootloaderImage=$(find . -name "bootloader-hammerhead-*.img" -type f)
+bootloaderImage=$(find . -name 'bootloader-hammerhead-*.img' -type f)
 fastboot flash bootloader "$bootloaderImage"
 fastboot reboot-bootloader
 
 read -rsp "Press return to continue..."
 
-radioImage=$(find . -name "radio-hammerhead-*.img" -type f)
+radioImage=$(find . -name 'radio-hammerhead-*.img' -type f)
 fastboot flash radio "$radioImage"
 fastboot reboot-bootloader
 

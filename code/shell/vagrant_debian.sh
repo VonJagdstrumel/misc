@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Build a vagrant box upon a Debian Jessie image
 
 # Allow password authentication, disable reverse dns lookup, remove motd and restart ssh
