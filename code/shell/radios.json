@@ -1,0 +1,177 @@
+[
+  {
+    "name": "Fun Radio",
+    "image": "6239.v4.png",
+    "site_url": "http://www.funradio.fr/",
+    "radio_url": "http://streaming.radio.funradio.fr/fun-1-44-128",
+    "description": "Fun Radio est une station de radio privée française détenue par le groupe RTL et un réseau de radiodiffusion, constitué de la station de radio nationale et de onze antennes locales, produisant chacune leur programme propre lors des décrochages. Le format de cette radio est musical, orienté dancefloor."
+  },
+  {
+    "name": "Europe 1",
+    "image": "4757.v3.png",
+    "site_url": "http://www.europe1.fr/",
+    "radio_url": "http://ais-live.cloud-services.paris:8000/europe1.mp3?",
+    "description": "Bienvenue sur la page officielle d'Europe1 pour commenter l'actualité et réagir à nos programmes !"
+  },
+  {
+    "name": "France Info",
+    "image": "6235.v2.png",
+    "site_url": "http://www.franceinfo.fr/",
+    "radio_url": "https://icecast.radiofrance.fr/franceinfo-midfi.mp3",
+    "description": "Bienvenue sur la   de France Info, la chaîne info du service public. France Info fait partie du Groupe Radio France"
+  },
+  {
+    "name": "RFM Radio",
+    "image": "6240.v3.png",
+    "site_url": "http://www.rfm.fr/",
+    "radio_url": "https://rfm-live.akamaized.net/rfm.isml/rfm-audio=128000.m3u8",
+    "description": "Le meilleur de la musique, les infos sur RFM, l'actualité de la station, ses émissions, ses animateurs... avec des photos, des vidéos... et des cadeaux, rien que pour vous !"
+  },
+  {
+    "name": "France Inter",
+    "image": "3708.v4.png",
+    "site_url": "http://www.franceinter.fr/",
+    "radio_url": "https://direct.franceinter.fr/live/franceinter-midfi.mp3",
+    "description": "Information, divertissement, culture ou musique, venez voir en studio les émissions que vous écoutez habituellement sur France Inter !"
+  },
+  {
+    "name": "RTL Radio",
+    "image": "6238.v4.png",
+    "site_url": "http://www.rtl.fr/",
+    "radio_url": "http://streaming.radio.rtl.fr/rtl-1-44-128",
+    "description": "RTL, sigle de Radio Télé Luxembourg, est une station de radio généraliste privée française de catégorie E, propriété du groupe de médias français M6, dont l'actionnaire principal est le groupe audiovisuel luxembourgeois RTL Group.Elle diffuse principalement en France en grandes ondes, en FM et sur le satellite, et propose ses programmes sur Internet. Elle est régulièrement classée première radio de France en termes d'audience, avec une moyenne de 6,3 millions d'auditeurs quotidiens en 2016."
+  },
+  {
+    "name": "France Bleu Paris",
+    "image": "5871.v5.png",
+    "site_url": "https://www.francebleu.fr/",
+    "radio_url": "https://icecast.radiofrance.fr/fb1071-midfi.mp3",
+    "description": "France Bleu s’attache à décrypter au quotidien l’actualité du point de vue de l’auditeur, en l’informant et le conseillant sur le monde qui l’entoure."
+  },
+  {
+    "name": "Virgin Radio",
+    "image": "4783.v4.png",
+    "site_url": "http://www.virginradio.fr/",
+    "radio_url": "https://ais-live.cloud-services.paris:8443/virgin.aac",
+    "description": "La radio avec la playlist Pop Rock Electro, les infos, des cadeaux, le calendrier des concerts, les dernières actus de vos stars favorites, des jeux/concours, les vidéos les plus in et bien plus encore!"
+  },
+  {
+    "name": "Radio RMC",
+    "image": "5985.v10.png",
+    "site_url": "http://rmc.bfmtv.com/",
+    "radio_url": "https://rmc2hdslive-lh.akamaihd.net/i/DVMR_RMC@167269/master.m3u8",
+    "description": "RMC Info - toute l'actualité et l'information sportive en direct ! Radio Monte Carlo est une radio de Talk généraliste d'origine monégasque."
+  },
+  {
+    "name": "RTL2",
+    "image": "4784.v2.png",
+    "site_url": "http://www.rtl2.fr/",
+    "radio_url": "http://icecast.rtl2.fr/rtl2-1-48-72.aac",
+    "description": "La grande station dans votre région avec des les bons plans, les sorties, les news, les dernières photos people, et bien-sûr nos jeux, vidéos, émissions et de la musique pop-Rock!"
+  },
+  {
+    "name": "Contact FM",
+    "image": "6354.v4.png",
+    "site_url": "http://www.mycontact.fr/",
+    "radio_url": "https://radio-contact.ice.infomaniak.ch/radio-contact-high.mp3",
+    "description": "Vous écoutez en direct Contact FM. Le mix du Grand Nord ! Contact FM est une station de radio française appartenant au groupe La Voix. Il s’agit de la radio de référence basée dans le Nord. Retrouvez sa programmation dancefloor, ses nouveautés, son ton positif, sans oublier les jeux, les rendez-vous exceptionnels et les évènements innovants. Vous pouvez la retrouvez partout grâce aux applis, sur MyContact.fr et sur le Grand Nord de la France en FM."
+  },
+  {
+    "name": "Metropolys Radio",
+    "image": "6155.v4.png",
+    "site_url": "http://www.metropolys.com/",
+    "radio_url": "http://str0.creacast.com/metropolys",
+    "description": "Rythmé, convivial, fédérateur le format musical de METROPOLYS se concentre sur les hits « dansants » des années 80, 90, 2000 et d’aujourd’hui."
+  },
+  {
+    "name": "Mona FM",
+    "image": "5081.v2.png",
+    "site_url": "http://www.monafm.fr/",
+    "radio_url": "https://monafm.ice.infomaniak.ch/monafm-high.mp3",
+    "description": "Mona FM, elle vous en donne plus à Lille sur 99.8 FM - Lens sur 101.9 FM et Arras sur 90.3 FM.Écoutez Mona FM 99.8 FM Lille via ecouterradioenligne.com. Avec un simple clic, vous pouvez écouter les meilleures stations de radio en direct de France."
+  },
+  {
+    "name": "Horizon",
+    "image": "6436.v5.png",
+    "site_url": "http://horizonradio.fr/",
+    "radio_url": "https://horizonradio-bethunelens.ice.infomaniak.ch/horizonradio-bethunelens-128",
+    "description": "A Lens, Béthune et Arras, Horizon c'est le meilleur des nouveautés et des années 80.Horizon, c'est aussi l'info locale, l'info trafic en temps réel et les bons plans du Nord-Pas-de-Calais.Horizon,à Lens et Béthune sur le 88, et à Arras sur le 98.5, tout le monde l'écoute!"
+  },
+  {
+    "name": "AnimeNfo Radio",
+    "image": "12922.v2.png",
+    "site_url": "https://www.animenfo.com//radio/",
+    "radio_url": "http://158.69.9.92:443/;",
+    "description": "アニメや日本の音楽のためのあなたの最高のソースです。 AnimeNfoは、すべての要求のラジオ局です。このように、私たちはずっとあなたが要求したときにすることができる方法を制御するルールの数を持っています。"
+  },
+  {
+    "name": "J-Pop Haru Sakura",
+    "image": "13165.v6.png",
+    "site_url": "http://www.asiadreamradio.com/",
+    "radio_url": "http://agnes.torontocast.com:8087/;.mp3",
+    "description": "Springtime Sakura songs from asia DREAM radio - The Heart of J-Pop Music."
+  },
+  {
+    "name": "J-Pop Haru Sakura",
+    "image": "13165.v6.png",
+    "site_url": "http://www.asiadreamradio.com/",
+    "radio_url": "http://agnes.torontocast.com:8087/;.mp3",
+    "description": "Springtime Sakura songs from asia DREAM radio - The Heart of J-Pop Music."
+  },
+  {
+    "name": "J-Pop Powerplay",
+    "image": "12930.v5.png",
+    "site_url": "http://www.asiadreamradio.com/",
+    "radio_url": "http://agnes.torontocast.com:8102/;",
+    "description": "Japan's top boybands and supergroups. The Heart Of J-Pop Music."
+  },
+  {
+    "name": "J-Pop Powerplay",
+    "image": "12930.v5.png",
+    "site_url": "http://www.asiadreamradio.com/",
+    "radio_url": "http://agnes.torontocast.com:8102/;",
+    "description": "Japan's top boybands and supergroups. The Heart Of J-Pop Music."
+  },
+  {
+    "name": "Vocaloid Radio",
+    "image": "12926.v2.png",
+    "site_url": "http://vocaloidradio.com/",
+    "radio_url": "http://curiosity.shoutca.st:8019/stream",
+    "description": "Vocaloid Radio is dedicated to playing all types of Vocaloid music from all genres. The station is made for fans by fans!"
+  },
+  {
+    "name": "Banana FM",
+    "image": "67744.png",
+    "site_url": "http://877.fm/",
+    "radio_url": "https://musicbird.leanstream.co/JCB075-MP3",
+    "description": "和歌山県和歌山市ベースのコミュニティFMラジオ局。地域に即した番組を目指し、ワイド番組やトーク、音楽などを幅広く提供。"
+  },
+  {
+    "name": "Moon Mission",
+    "image": "67494.png",
+    "site_url": "http://moonmission.jp/",
+    "radio_url": "http://uk5.internet-radio.com:8306/;stream.nsv",
+    "description": "Moon Mission Recordings, Tokyo Deep and Electronic is a cutting edge electronic dance music label which is an output for Ken Sekiguchi and other talented new DJs and Producers.Music controls the speed of time in any environment. In any environment, by changing the speed of time, we will play tricks on the people on the dance floor."
+  },
+  {
+    "name": "Armitage's Dimension",
+    "image": "19974.png",
+    "site_url": "http://www.armitunes.com/",
+    "radio_url": "http://mp3.fr.armitunes.com:8000/;",
+    "description": "Armitage's Dimension is an online streaming radio station from Herndon, VA, United States, that broadcasts Japanese Pop, Rock and Anime music 24 hours a day, 7 days a week."
+  },
+  {
+    "name": "Yggdrasil Radio",
+    "image": "29612.png",
+    "site_url": "http://yggdrasilradio.net/",
+    "radio_url": "http://shirayuki.org:9200/;",
+    "description": "Yggdrasil Radio is an Internet Radio station broadcasting from Burnsville, Minnesota, United States, provides The best in Jpop, anime and game music."
+  },
+  {
+    "name": "Keiichi.net EX² : Extreme Anime Radio",
+    "image": "18263.png",
+    "site_url": "http://animeradio.net/",
+    "radio_url": "http://174.37.159.206:8052/1?cb=615299.mp3",
+    "description": "Extreme Anime Radio: Delivering the Best of Anime, J-Pop, and Video Game Music straight from Japan, 24 hours a day, 7 days a week."
+  }
+]
