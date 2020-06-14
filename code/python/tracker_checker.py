@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import socket
 import struct
 import sys
@@ -10,31 +11,33 @@ from urllib import parse
 import bencode
 import requests
 
-BT_UDP_PROT_ID_H = 0x417
-BT_UDP_PROT_ID_L = 0x27101980
-BT_UDP_TRAN_ID = 42
-BT_HTTP_QUERY = 'info_hash=%c7%8a%7b%e0%60%93%4e%28%6b%b0%69%fc%b9%49%65%6b%c6%5d%48%11&peer_id=-SU2291-SOVIETRUSSIA&port=0&downloaded=0&uploaded=0&left=0'
-BT_TIMEOUT = 10
-
 
 def tracker_connect(url):
-    resp = requests.get(url + '?' + BT_HTTP_QUERY, timeout = BT_TIMEOUT)
+    resp = requests.get(url, timeout = 10, params = {
+        'info_hash': b'\xc7\x8a\x7b\xe0\x60\x93\x4e\x28\x6b\xb0\x69\xfc\xb9\x49\x65\x6b\xc6\x5d\x48\x11',
+        'peer_id': '-SU2291-SOVIETRUSSIA',
+        'port': 6881,
+        'downloaded': 0,
+        'uploaded': 0,
+        'left': 0
+    })
 
     if not bencode.decode(resp.content):
         raise ValueError
 
 
 def tracker_send(tracker):
-    message = struct.pack('>2L', BT_UDP_PROT_ID_H, BT_UDP_PROT_ID_L) + struct.pack('<2L', 0, BT_UDP_TRAN_ID)
+    trans_id = os.urandom(4)
+    message = struct.pack('>ql4s', 0x41727101980, 0, trans_id)
     address = (tracker.hostname, tracker.port)
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.settimeout(BT_TIMEOUT)
+    sock.settimeout(10)
     sock.sendto(message, address)
     data = sock.recv(32)
     sock.close()
-    parsed_data = struct.unpack('<4L', data)
+    parsed_data = struct.unpack('>l4sq', data)
 
-    if parsed_data[0] != 0 or parsed_data[1] != BT_UDP_TRAN_ID:
+    if parsed_data[0] != 0 or parsed_data[1] != trans_id:
         raise ValueError
 
 
