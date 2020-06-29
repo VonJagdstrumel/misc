@@ -4,9 +4,9 @@ import os
 import socket
 import struct
 import sys
+import urllib.parse
 
 from concurrent import futures
-from urllib import parse
 
 import bencode
 import requests
@@ -42,7 +42,7 @@ def tracker_send(tracker):
 
 
 def check_tracker(url):
-    tracker = parse.urlparse(url)
+    tracker = urllib.parse.urlparse(url)
     if not tracker.scheme or not tracker.hostname:
         raise ValueError
 
@@ -57,16 +57,12 @@ def check_tracker(url):
         pass
 
 
-def process(data_list):
+if __name__ == '__main__':
     future_list = []
     pool = futures.ThreadPoolExecutor()
 
-    for line in data_list:
+    for line in sys.stdin:
         future = pool.submit(check_tracker, line.strip())
         future_list.append(future)
 
     futures.wait(future_list)
-
-
-if __name__ == '__main__':
-    process(sys.stdin)

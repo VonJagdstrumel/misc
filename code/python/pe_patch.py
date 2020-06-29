@@ -19,15 +19,11 @@ def write_size(fh, pos, size, data):
     fh.write(packed)
 
 
-def patch(file_path):
-    fh = open(file_path, 'r+b')
+if __name__ == '__main__':
+    fh = open(sys.argv[1], 'r+b')
     subsystem_pos = 0x5c + read_size(fh, 0x3c, 4)
     subsystem = read_size(fh, subsystem_pos, 2)
 
     if subsystem in (2, 3):
         subsystem = (subsystem - 1) % 2 + 2
         write_size(fh, subsystem_pos, 2, subsystem)
-
-
-if __name__ == '__main__':
-    patch(sys.argv[1])

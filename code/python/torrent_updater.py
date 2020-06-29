@@ -25,15 +25,15 @@ def is_protected(torrent):
     return False
 
 
-def process(search_path):
-    file_list = os.listdir(search_path)
+if __name__ == '__main__':
+    file_list = os.listdir(sys.argv[1])
     regex = re.compile(r'(archive\.org|ehtracker\.org|yggtorrent\.com|debian\.org)')
 
     for file_name in file_list:
         if not file_name.endswith('.fastresume'):
             continue
 
-        file_path = search_path + '/' + file_name
+        file_path = sys.argv[1] + '/' + file_name
         fd = open(file_path, 'r+b')
         content = fd.read()
         torrent = bencode.decode(content)
@@ -46,7 +46,3 @@ def process(search_path):
         fd.seek(0)
         fd.write(content)
         fd.close()
-
-
-if __name__ == '__main__':
-    process(sys.argv[1])

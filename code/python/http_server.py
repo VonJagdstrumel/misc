@@ -30,6 +30,7 @@ class CustomHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         return open('/proc/loadavg').read().encode()
 
 
-server_address = ('127.0.0.1', 8000)
-httpd = http.server.ThreadingHTTPServer(server_address, CustomHTTPRequestHandler)
-httpd.serve_forever()
+if __name__ == '__main__':
+    server_address = ('127.0.0.1', 8000)
+    httpd = http.server.ThreadingHTTPServer(server_address, CustomHTTPRequestHandler)
+    httpd.serve_forever()

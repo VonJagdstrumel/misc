@@ -15,7 +15,7 @@ def get_app_list():
     return app_list
 
 
-def list_installed():
+if __name__ == '__main__':
     base_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, 'Software\Valve\Steam\Apps')
     subkey_count = winreg.QueryInfoKey(base_key)[0]
     app_list = get_app_list()
@@ -31,7 +31,3 @@ def list_installed():
             value = -1
 
         print(subkey_name + '\t' + str(value) + '\t' + str(app_name))
-
-
-if __name__ == '__main__':
-    list_installed()
