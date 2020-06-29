@@ -1,3 +1,4 @@
 bencode.py
 cygwinreg3
+lz4
 requests
