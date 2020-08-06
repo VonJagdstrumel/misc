@@ -23,11 +23,14 @@ class PackageParser:
             key = key[:-1]
 
             if not key:
-                name = value[0]
                 pkg = {'category': set(), 'requires': set()}
+                name = value[0]
                 self.pkg_list[name] = pkg
             elif key in pkg.keys():
                 pkg[key] |= set(value)
+            elif key == 'provides':
+                name = value[0]
+                self.pkg_list[name] = pkg
 
         for line in data_list:
             line = line.strip()
