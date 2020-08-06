@@ -15,7 +15,6 @@ http://fr33dom.h33t.com:3310/announce
 http://gameupdates.org/announce.php
 http://greenlietracker.appspot.com/announce
 http://i.bandito.org/announce
-http://p4p.arenabg.ch:1337/announce
 http://tk.greedland.net/announce
 http://torrent.gresille.org/announce
 http://tracker.aletorrenty.pl:2710/announce
@@ -42,7 +41,6 @@ udp://open.demonii.com:1337
 udp://open.facedatabg.net:6969
 udp://open.nyaatorrents.info:6544
 udp://oscar.reyesleon.xyz:6969
-udp://pow7.com:80
 udp://public.popcorn-tracker.org:6969
 udp://stats.anisource.net:2710
 udp://thetracker.org:80
@@ -65,7 +63,6 @@ udp://tracker.token.ro:80
 udp://tracker.vanitycore.co:6969
 udp://tracker.xku.tv:6969
 udp://tracker.yify-torrents.com:80
-udp://tracker.zer0day.to:1337
 udp://tracker.zond.org:80
 udp://tracker1.wasabii.com.tw:6969
 udp://wambo.club:1337

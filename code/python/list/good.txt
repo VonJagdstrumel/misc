@@ -1,5 +1,7 @@
 http://anidex.moe:6969/announce
+http://bt.uniondht.org:777/announce
 http://bt4.t-ru.org/ann?magnet
+http://ger88.000webhostapp.com/automat/anuanPB.php
 http://nyaa.tracker.wf:7777/announce
 http://open.acgtracker.com:1096/announce
 http://plab.site/ann?uk=OW9seaxw14
@@ -9,7 +11,6 @@ http://tracker.anirena.com/announce
 http://tracker.bt4g.com:2095/announce
 http://tracker.dler.org:6969/announce
 http://tracker.electro-torrent.pl/announce
-http://tracker.skyts.net:6969/announce
 https://104.28.17.69/announce
 https://open.kickasstracker.com/announce
 https://tracker.bt-hash.com/announce
@@ -21,12 +22,15 @@ udp://explodie.org:6969
 udp://ipv4.tracker.harry.lu:80
 udp://open.demonii.si:1337
 udp://open.stealth.si:80
-udp://p4p.arenabg.com:1337
+udp://p4p.arenabg.ch:1337
+udp://pow7.com:80
 udp://retracker.lanta-net.ru:2710
+udp://shubt.net:2710
 udp://tracker.coppersurfer.tk:6969
 udp://tracker.cyberia.is:6969
 udp://tracker.iamhansen.xyz:2000
 udp://tracker.internetwarriors.net:1337
+udp://tracker.kuroy.me:5944
 udp://tracker.leechers-paradise.org:6969
 udp://tracker.openbittorrent.com:80
 udp://tracker.open-internet.nl:6969
@@ -40,5 +44,6 @@ udp://tracker.torrent.eu.org:451
 udp://tracker.tvunderground.org.ru:3218
 udp://tracker.uw0.xyz:6969
 udp://tracker.yoshi210.com:6969
+udp://tracker.zer0day.to:1337
 udp://tracker4.itzmx.com:2710
 udp://zephir.monocul.us:6969
