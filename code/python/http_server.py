@@ -27,7 +27,8 @@ class CustomHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
     @route('/loadavg')
     def get_loadavg(self):
-        return open('/proc/loadavg').read().encode()
+        with open('/proc/loadavg') as f:
+            return f.read().encode()
 
 
 if __name__ == '__main__':

@@ -33,16 +33,15 @@ if __name__ == '__main__':
         if not file_name.endswith('.fastresume'):
             continue
 
-        file_path = sys.argv[1] + '/' + file_name
-        fd = open(file_path, 'r+b')
-        content = fd.read()
-        torrent = bencode.decode(content)
+        with open(sys.argv[1] + '/' + file_name, 'r+b') as f:
+            content = f.read()
+            torrent = bencode.decode(content)
 
-        if is_protected(torrent):
-            continue
+            if is_protected(torrent):
+                continue
 
-        torrent['trackers'] = build_tracker_list()
-        content = bencode.encode(torrent)
-        fd.seek(0)
-        fd.write(content)
-        fd.close()
+            torrent['trackers'] = build_tracker_list()
+            content = bencode.encode(torrent)
+            f.seek(0)
+            f.write(content)
+            f.close()

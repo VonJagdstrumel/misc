@@ -7,9 +7,9 @@ from pe_patch import read_size
 
 
 def get_arch(file_path):
-    fh = open(file_path, 'rb')
-    machine_pos = 0x4 + read_size(fh, 0x3c, 4)
-    machine = read_size(fh, machine_pos, 2)
+    with open(file_path, 'rb') as f:
+        machine_pos = 0x4 + read_size(f, 0x3c, 4)
+        machine = read_size(f, machine_pos, 2)
 
     if machine == 0x14c:
         return 'x86'
