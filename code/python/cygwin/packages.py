@@ -5,6 +5,8 @@ import sys
 
 import requests
 
+from utils import dataproc
+
 
 class PackageParser:
 
@@ -13,7 +15,7 @@ class PackageParser:
         self.name_set = set()
         resp = requests.get(url)
         iter = (i.decode() for i in resp.iter_lines())
-        reader = csv.reader(iter, delimiter = ' ')
+        reader = csv.reader(iter, delimiter=' ')
 
         for row in reader:
             if len(row) < 2:
@@ -33,10 +35,7 @@ class PackageParser:
                 self.pkg_list[name] = pkg
 
         for line in data_list:
-            line = line.strip()
-
-            if line:
-                self.name_set.add(line)
+            self.name_set.add(line)
 
     def resolve(self, pkg_name):
         pkg = self.pkg_list[pkg_name]
@@ -77,7 +76,8 @@ class PackageParser:
 
 
 if __name__ == '__main__':
-    parser = PackageParser('https://ftp.fau.de/cygwin/x86_64/setup.ini', sys.stdin)
+    parser = PackageParser('https://ftp.fau.de/cygwin/x86_64/setup.ini',
+                           dataproc.clean_reader(sys.stdin))
 
     for p_name in parser.clean():
         print(p_name)
