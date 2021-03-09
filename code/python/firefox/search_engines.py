@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
+# no
+
 import base64
 import imghdr
 import json
 import sys
 import tempfile
 
-import lz4.block
+from lz4 import block
 import requests
 
 
@@ -21,14 +23,14 @@ imghdr.tests.append(test_ico)
 def load(path):
     with open(path, 'rb') as f:
         raw = f.read()
-        raw = lz4.block.decompress(raw[8:])
+        raw = block.decompress(raw[8:])
         return json.loads(raw)
 
 
 def dump(path, data):
     with open(path, 'wb') as f:
         raw = json.dumps(data).encode()
-        raw = b'mozLz40\0' + lz4.block.compress(raw)
+        raw = b'mozLz40\0' + block.compress(raw)
         f.write(raw)
 
 
@@ -42,14 +44,14 @@ def data_uri(url):
         return f'data:image/{type};base64,{data}'
 
 
-def convert_engine(engine, order, alias = None):
+def convert_engine(engine, order, alias=None):
     return {
         '_name': engine['name'],
         '_shortName': engine['name'].lower().replace(' ', '-'),
         'description': engine['name'],
         'queryCharset': 'UTF-8',
         '_iconURL': data_uri(engine['iconUrl']),
-        '_loadPath': '[other]addEngineWithDetails',
+        '_loadPath': '[other]add_engineWithDetails',
         '_metaData': {
             'alias': alias,
             'order': order
@@ -63,25 +65,27 @@ def convert_engine(engine, order, alias = None):
 
 
 if __name__ == '__main__':
-    with open(sys.argv[1], 'rb') as f:
-        sJson = json.load(f)
+    with open(sys.argv[1]) as f:
+        s_json = json.load(f)
 
-    dJson = load(sys.argv[2])
+    d_json = load(sys.argv[2])
     order = 1
     engines = []
 
-    for sEngine in sJson['searchEngines']:
-        if sEngine.get('id') == 'separator':
+    for s_engine in s_json['searchEngines']:
+        if s_engine.get('id') == 'separator':
             continue
 
         try:
-            dEngine = next(e for e in dJson['engines'] if e['_name'] == sEngine['name'])
-            dEngine = convert_engine(sEngine, order, dEngine['_metaData']['alias'])
+            d_engine = next(e for e in d_json['engines']
+                            if e['_name'] == s_engine['name'])
+            d_engine = convert_engine(s_engine, order,
+                                      d_engine['_metaData']['alias'])
         except StopIteration:
-            dEngine = convert_engine(sEngine, order)
+            d_engine = convert_engine(s_engine, order)
 
         order += 1
-        engines.append(dEngine)
+        engines.append(d_engine)
 
-    dJson['engines'] = engines
-    dump(sys.argv[2], dJson)
+    d_json['engines'] = engines
+    dump(sys.argv[2], d_json)
