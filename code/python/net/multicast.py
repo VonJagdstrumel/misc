@@ -16,10 +16,11 @@ class PeerPool:
         self._prune()
         return iter(self._pool)
 
-    def _prune(self, key = None):
+    def _prune(self, key=None):
         if key:
             if key in self._pool:
-                expire_date = self._pool[key] + datetime.timedelta(seconds = self._config.lifetime)
+                ttl = datetime.timedelta(seconds=self._config.lifetime)
+                expire_date = self._pool[key] + ttl
 
                 if expire_date < datetime.datetime.now():
                     del self._pool[key]
@@ -33,7 +34,7 @@ class PeerPool:
 
 class Configuration:
 
-    def __init__(self, path = None):
+    def __init__(self, path=None):
         conf_str = '[config]'
         parser = configparser.ConfigParser()
         self.__dict__ = {
@@ -97,13 +98,13 @@ class Receiver(threading.Thread):
 
         for iface in interfaces():
             iface = socket.inet_aton(iface)
-            sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, group + iface)
+            sock.setsockopt(socket.IPPROTO_IP,
+                            socket.IP_ADD_MEMBERSHIP, group + iface)
 
         while True:
             _, addr = sock.recvfrom(1024)
 
-            if True:
-            # if addr[0] not in interfaces():
+            if addr[0] not in interfaces():
                 self._pool.update(addr[0])
 
 
@@ -120,7 +121,8 @@ class Sender(threading.Thread):
         while True:
             for iface in interfaces():
                 iface = socket.inet_aton(iface)
-                sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_IF, iface)
+                sock.setsockopt(socket.IPPROTO_IP,
+                                socket.IP_MULTICAST_IF, iface)
                 sock.sendto(b'', addr)
 
             time.sleep(self._config.update_delay)
@@ -142,7 +144,11 @@ def interfaces():
 
 
 if __name__ == '__main__':
-    config = Configuration(sys.argv[1]) if len(sys.argv) > 1 else Configuration()
+    if len(sys.argv) > 1:
+        config = Configuration(sys.argv[1])
+    else:
+        config = Configuration()
+
     pool = PeerPool(config)
     queryHandler = QueryHandler(config, pool)
     receiver = Receiver(config, pool)
