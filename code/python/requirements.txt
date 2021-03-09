@@ -1,4 +1,8 @@
 bencode.py
+cryptography
 cygwinreg3
 lz4
+PyNaCl
+remi
 requests
+websockets
