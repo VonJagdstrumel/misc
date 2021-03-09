@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 
+from concurrent import futures
+from urllib import parse
 import os
 import socket
 import struct
 import sys
-import urllib.parse
-
-from concurrent import futures
 
 import bencode
 import requests
 
+from utils import dataproc
 
-def tracker_connect(url):
-    resp = requests.get(url, timeout = 10, params = {
+
+def connect(url):
+    resp = requests.get(url, timeout=10, params={
         'info_hash': b'\xc7\x8a\x7b\xe0\x60\x93\x4e\x28\x6b\xb0\x69\xfc\xb9\x49\x65\x6b\xc6\x5d\x48\x11',
         'peer_id': '-SU2291-SOVIETRUSSIA',
         'port': 6881,
@@ -26,7 +27,7 @@ def tracker_connect(url):
         raise ValueError
 
 
-def tracker_send(tracker):
+def send(tracker):
     trans_id = os.urandom(4)
     message = struct.pack('>ql4s', 0x41727101980, 0, trans_id)
     address = (tracker.hostname, tracker.port)
@@ -41,16 +42,17 @@ def tracker_send(tracker):
         raise ValueError
 
 
-def check_tracker(url):
-    tracker = urllib.parse.urlparse(url)
+def check(url):
+    tracker = parse.urlparse(url)
+
     if not tracker.scheme or not tracker.hostname:
         raise ValueError
 
     try:
         if tracker.scheme == 'http':
-            tracker_connect(url)
+            connect(url)
         elif tracker.scheme == 'udp':
-            tracker_send(tracker)
+            send(tracker)
 
         print(url)
     except Exception:
@@ -61,8 +63,8 @@ if __name__ == '__main__':
     future_list = []
     pool = futures.ThreadPoolExecutor()
 
-    for line in sys.stdin:
-        future = pool.submit(check_tracker, line.strip())
+    for line in dataproc.clean_reader(sys.stdin):
+        future = pool.submit(check, line)
         future_list.append(future)
 
     futures.wait(future_list)
