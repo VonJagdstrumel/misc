@@ -7,8 +7,8 @@ from windows import kernel
 from windows.file import api
 
 
-def CreateFile(path, access, action):
-    res = api.CreateFileW(path, access, 0, None, action, 0, 0)
+def CreateFile(path, access, action, flags):
+    res = api.CreateFileW(path, access, 0, None, action, flags, None)
 
     if res == api.INVALID_HANDLE_VALUE.value:
         raise kernel.WinError()
@@ -23,6 +23,8 @@ def WriteFile(handle, data):
     if not api.WriteFile(handle, data, len(data), ref_written, None):
         raise kernel.WinError()
 
+    return written.value
+
 
 def ReadFile(handle, size):
     buf = ctypes.create_string_buffer(size)
@@ -33,3 +35,8 @@ def ReadFile(handle, size):
         raise kernel.WinError()
 
     return buf.value
+
+
+def OpenPipe(path):
+    return CreateFile(path, api.GENERIC_READ | api.GENERIC_WRITE,
+                      api.OPEN_EXISTING, api.FILE_FLAG_OVERLAPPED)
