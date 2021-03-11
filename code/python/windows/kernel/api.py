@@ -15,6 +15,8 @@ ERROR_ALREADY_EXISTS = 183
 ERROR_MORE_DATA = 234
 ERROR_NO_MORE_ITEMS = 259
 
+GMEM_MOVEABLE = 0x2
+
 _kernel32 = ctypes.CDLL('kernel32.dll')
 
 GetLastError = _kernel32.GetLastError
@@ -34,3 +36,20 @@ FormatMessageW.argtypes = [wintypes.DWORD,
 LocalFree = _kernel32.LocalFree
 LocalFree.restype = wintypes.HLOCAL
 LocalFree.argtypes = [wintypes.HLOCAL]
+
+GlobalAlloc = _kernel32.GlobalAlloc
+GlobalAlloc.restype = wintypes.HGLOBAL
+GlobalAlloc.argtypes = [wintypes.UINT,
+                        wintypes.ULONG]
+
+GlobalFree = _kernel32.GlobalFree
+GlobalFree.restype = wintypes.HGLOBAL
+GlobalFree.argtypes = [wintypes.HGLOBAL]
+
+GlobalLock = _kernel32.GlobalLock
+GlobalLock.restype = wintypes.LPVOID
+GlobalLock.argtypes = [wintypes.HGLOBAL]
+
+GlobalUnlock = _kernel32.GlobalUnlock
+GlobalUnlock.restype = wintypes.BOOL
+GlobalUnlock.argtypes = [wintypes.HGLOBAL]
