@@ -1,2 +1,2 @@
 %: %.c
-	$(CC) -o $@ $< -Wall -pedantic -O2 -s
+	$(CC) -o $@ $< -Wall -pedantic -march=native -O2 -s -pipe -static
