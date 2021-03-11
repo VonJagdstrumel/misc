@@ -44,7 +44,6 @@ class QUERY_SERVICE_CONFIGW(ctypes.Structure):
                 ('lpDisplayName',      wintypes.LPWSTR)]
 
 
-SC_HANDLE = wintypes.HANDLE
 SC_STATUS_TYPE = wintypes.INT
 LPSERVICE_STATUS = ctypes.POINTER(SERVICE_STATUS)
 LPQUERY_SERVICE_CONFIGW = ctypes.POINTER(QUERY_SERVICE_CONFIGW)
@@ -52,32 +51,32 @@ LPQUERY_SERVICE_CONFIGW = ctypes.POINTER(QUERY_SERVICE_CONFIGW)
 _advapi32 = ctypes.CDLL('advapi32.dll')
 
 OpenSCManagerW = _advapi32.OpenSCManagerW
-OpenSCManagerW.restype = SC_HANDLE
+OpenSCManagerW.restype = wintypes.SC_HANDLE
 OpenSCManagerW.argtypes = [wintypes.LPCWSTR,
                            wintypes.LPCWSTR,
                            wintypes.DWORD]
 
 OpenServiceW = _advapi32.OpenServiceW
-OpenServiceW.restype = SC_HANDLE
-OpenServiceW.argtypes = [SC_HANDLE,
+OpenServiceW.restype = wintypes.SC_HANDLE
+OpenServiceW.argtypes = [wintypes.SC_HANDLE,
                          wintypes.LPCWSTR,
                          wintypes.DWORD]
 
 QueryServiceStatus = _advapi32.QueryServiceStatus
 QueryServiceStatus.restype = wintypes.BOOL
-QueryServiceStatus.argtypes = [SC_HANDLE,
+QueryServiceStatus.argtypes = [wintypes.SC_HANDLE,
                                LPSERVICE_STATUS]
 
 QueryServiceConfigW = _advapi32.QueryServiceConfigW
 QueryServiceConfigW.restype = wintypes.BOOL
-QueryServiceConfigW.argtypes = [SC_HANDLE,
+QueryServiceConfigW.argtypes = [wintypes.SC_HANDLE,
                                 LPQUERY_SERVICE_CONFIGW,
                                 wintypes.DWORD,
                                 wintypes.LPDWORD]
 
 ChangeServiceConfigW = _advapi32.ChangeServiceConfigW
 ChangeServiceConfigW.restype = wintypes.BOOL
-ChangeServiceConfigW.argtypes = [SC_HANDLE,
+ChangeServiceConfigW.argtypes = [wintypes.SC_HANDLE,
                                  wintypes.DWORD,
                                  wintypes.DWORD,
                                  wintypes.DWORD,
@@ -91,6 +90,6 @@ ChangeServiceConfigW.argtypes = [SC_HANDLE,
 
 StartServiceW = _advapi32.StartServiceW
 StartServiceW.restype = wintypes.BOOL
-StartServiceW.argtypes = [SC_HANDLE,
+StartServiceW.argtypes = [wintypes.SC_HANDLE,
                           wintypes.DWORD,
                           wintypes.LPCWSTR]
