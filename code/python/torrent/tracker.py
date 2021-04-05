@@ -7,7 +7,7 @@ import socket
 import struct
 import sys
 
-import bencode
+import bencodepy
 import requests
 
 from utils import dataproc
@@ -23,7 +23,7 @@ def connect(url):
         'left': 0
     })
 
-    if not bencode.decode(resp.content):
+    if not bencodepy.bdecode(resp.content):
         raise ValueError
 
 
