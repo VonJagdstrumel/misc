@@ -3,3 +3,5 @@ cygwinreg3
 lz4
 PyNaCl
 requests
+requests-oauthlib
+requests-toolbelt
