@@ -24,3 +24,5 @@ sc stop WinHttpAutoProxySvc
 sc config WinHttpAutoProxySvc start= disabled
 sc stop WbioSrvc
 sc config WbioSrvc start= disabled
+sc stop WdNisSvc
+sc config WdNisSvc start= disabled
