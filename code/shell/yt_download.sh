@@ -11,4 +11,4 @@ while IFS='=' read -rd\& key val; do
     break
 done <<< "$(curl -s "https://www.youtube.com/get_video_info?video_id=$id")&"
 
-~/Programs/Console/ffmpeg -loglevel warning -hide_banner -y -i "$s_url" -map 0:a -ss "${ss-0}" ${2+-t $2} -c:a libmp3lame -b:a 256k "$id${ss+@$ss}.mp3"
+ffmpeg -loglevel warning -hide_banner -y -i "$s_url" -map 0:a -ss "${ss-0}" ${2+-t $2} -c:a libmp3lame -b:a 256k "$id${ss+@$ss}.mp3"
