@@ -17,3 +17,4 @@ adb shell pm uninstall --user 0 com.oneplus.contacts
 adb shell pm uninstall --user 0 com.oneplus.gallery
 adb shell pm uninstall --user 0 com.oneplus.gamespace
 adb shell pm uninstall --user 0 com.oneplus.mms
+adb shell pm uninstall --user 0 com.oneplus.twspods
