@@ -7,8 +7,8 @@ from utils import dataproc
 
 def get(pe_path):
     with open(pe_path, 'rb') as f:
-        pos = 0x4 + dataproc.pack_read(f, 0x3c, '<I')
-        mach = dataproc.pack_read(f, pos, '<H')
+        pos = 0x4 + dataproc.pack_read_at(f, 0x3c, '<I')
+        mach = dataproc.pack_read_at(f, pos, '<H')
 
     if mach == 0x14c:
         return 'x86'

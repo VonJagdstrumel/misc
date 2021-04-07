@@ -7,12 +7,12 @@ from utils import dataproc
 
 def patch(pe_path):
     with open(pe_path, 'r+b') as f:
-        pos = 0x5c + dataproc.pack_read(f, 0x3c, '<I')
-        subsys = dataproc.pack_read(f, pos, '<H')
+        pos = 0x5c + dataproc.pack_read_at(f, 0x3c, '<I')
+        subsys = dataproc.pack_read_at(f, pos, '<H')
 
         if subsys in (2, 3):
             subsys = (subsys - 1) % 2 + 2
-            dataproc.pack_write(f, pos, '<H', subsys)
+            dataproc.pack_write_at(f, pos, '<H', subsys)
 
 
 if __name__ == '__main__':
