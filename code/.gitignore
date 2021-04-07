@@ -1,7 +1,0 @@
-*.exe
-*.o
-*.zip
-__pycache__/
-composer.lock
-vendor/
-venv/
