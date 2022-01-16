@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
 adb shell pm grant com.maxmpz.audioplayer android.permission.SET_VOLUME_KEY_LONG_PRESS_LISTENER
+adb shell pm disable-user --user 0 com.android.bips
+adb shell pm disable-user --user 0 com.android.providers.partnerbookmarks
+adb shell pm disable-user --user 0 com.google.android.feedback
+adb shell pm disable-user --user 0 com.google.android.partnersetup
+adb shell pm disable-user --user 0 com.google.android.printservice.recommendation
 adb shell pm uninstall --user 0 cn.oneplus.photos
 adb shell pm uninstall --user 0 com.android.chrome
 adb shell pm uninstall --user 0 com.google.android.apps.tachyon
 adb shell pm uninstall --user 0 com.google.android.apps.walletnfcrel
 adb shell pm uninstall --user 0 com.google.android.apps.wellbeing
+adb shell pm uninstall --user 0 com.google.android.apps.youtube.music
 adb shell pm uninstall --user 0 com.google.android.marvin.talkback
 adb shell pm uninstall --user 0 com.google.android.music
 adb shell pm uninstall --user 0 com.google.android.projection.gearhead
