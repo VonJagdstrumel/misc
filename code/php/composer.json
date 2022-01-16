@@ -12,10 +12,8 @@
 		}
 	],
 	"require" : {
-		"php" : ">=5.5",
+		"php" : ">=7.3",
 		"vonjagdstrumel/libutil" : "dev-master",
-		"anahkiasen/underscore-php" : "^2.0",
-		"guzzlehttp/guzzle" : "^6.2",
-		"laravel/framework" : "^5.3"
+		"guzzlehttp/guzzle" : "^6.2"
 	}
 }
