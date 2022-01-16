@@ -1,13 +1,12 @@
-import configparser
-import datetime
+from configparser import ConfigParser
+from datetime import datetime, timedelta
 import socket
 import sys
-import threading
+from threading import Thread
 import time
 
 
 class PeerPool:
-
     def __init__(self, config):
         self._config = config
         self._pool = {}
@@ -19,24 +18,23 @@ class PeerPool:
     def _prune(self, key=None):
         if key:
             if key in self._pool:
-                ttl = datetime.timedelta(seconds=self._config.lifetime)
+                ttl = timedelta(seconds=self._config.lifetime)
                 expire_date = self._pool[key] + ttl
 
-                if expire_date < datetime.datetime.now():
+                if expire_date < datetime.now():
                     del self._pool[key]
         else:
             for key in self._pool:
                 self._prune(key)
 
     def update(self, key):
-        self._pool[key] = datetime.datetime.now()
+        self._pool[key] = datetime.now()
 
 
 class Configuration:
-
     def __init__(self, path=None):
         conf_str = '[config]'
-        parser = configparser.ConfigParser()
+        parser = ConfigParser()
         self.__dict__ = {
             'group': '239.4.8.20',
             'port': 4820,
@@ -45,8 +43,8 @@ class Configuration:
         }
 
         if path:
-            with open(path) as f:
-                conf_str += '\n' + f.read()
+            with open(path) as fp:
+                conf_str += '\n' + fp.read()
 
         parser.read_string(conf_str)
 
@@ -59,8 +57,7 @@ class Configuration:
                 self.__dict__[key] = parser['config'][key]
 
 
-class QueryHandler(threading.Thread):
-
+class QueryHandler(Thread):
     def __init__(self, config, pool):
         super().__init__()
         self._config = config
@@ -82,8 +79,7 @@ class QueryHandler(threading.Thread):
                 conn.sendall(msg)
 
 
-class Receiver(threading.Thread):
-
+class Receiver(Thread):
     def __init__(self, config, pool):
         super().__init__()
         self._config = config
@@ -108,8 +104,7 @@ class Receiver(threading.Thread):
                 self._pool.update(addr[0])
 
 
-class Sender(threading.Thread):
-
+class Sender(Thread):
     def __init__(self, config):
         super().__init__()
         self._config = config

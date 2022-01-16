@@ -2,7 +2,7 @@
 
 import ctypes
 from ctypes import wintypes
-import io
+from io import StringIO
 import re
 
 from windows import kernel
@@ -24,18 +24,18 @@ def SetDeskWallpaper(path):
         raise kernel.WinError()
 
 
-def SetClipboardData(type, data):
+def SetClipboardData(typ, data):
     size = len(data) + 1
     handle = kapi.GlobalAlloc(kapi.GMEM_MOVEABLE, size)
     buf = kapi.GlobalLock(handle)
     ctypes.memmove(buf, wintypes.LPSTR(data), size)
     kapi.GlobalUnlock(handle)
-    api.SetClipboardData(type, handle)
+    api.SetClipboardData(typ, handle)
     kapi.GlobalFree(handle)
 
 
 def ComposeHtmlClipboard(data):
-    with io.StringIO() as cb:
+    with StringIO() as cb:
         offsets = [m.start() + 1 for m in re.finditer(':', CB_HTML_HEADER)]
 
         cb.write(CB_HTML_HEADER)

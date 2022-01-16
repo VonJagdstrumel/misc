@@ -2,13 +2,14 @@
 
 import sys
 
-from utils import dataproc
+from utils.dataproc import StructFile
 
 
 def get(pe_path):
-    with open(pe_path, 'rb') as f:
-        pos = 0x4 + dataproc.pack_read_at(f, 0x3c, '<I')
-        mach = dataproc.pack_read_at(f, pos, '<H')
+    with open(pe_path, 'rb') as fp:
+        sf = StructFile(fp)
+        pos = 0x4 + sf.read_at(0x3c, '<I')
+        mach = sf.read_at(pos, '<H')
 
     if mach == 0x14c:
         return 'x86'
