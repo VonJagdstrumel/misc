@@ -9,75 +9,68 @@ from utils import dataproc
 
 
 class PackageParser:
-
-    def __init__(self, url, data_list):
-        self.pkg_list = {}
-        self.name_set = set()
+    def __init__(self, url):
+        self.pkgs = {}
         resp = requests.get(url)
-        iter = (i.decode() for i in resp.iter_lines())
-        reader = csv.reader(iter, delimiter=' ')
+        gen = (i.decode() for i in resp.iter_lines())
+        reader = csv.reader(gen, delimiter=' ')
 
         for row in reader:
             if len(row) < 2:
                 continue
 
-            key, *value = row
+            key, *val = row
             key = key[:-1]
 
             if not key:
                 pkg = {'category': set(), 'requires': set()}
-                name = value[0]
-                self.pkg_list[name] = pkg
+                name = val[0]
+                self.pkgs[name] = pkg
             elif key in pkg.keys():
-                pkg[key] |= set(value)
+                pkg[key] |= set(val)
             elif key == 'provides':
-                name = value[0]
-                self.pkg_list[name] = pkg
+                name = val[0]
+                self.pkgs[name] = pkg
 
-        for line in data_list:
-            self.name_set.add(line)
+    def resolve(self, name):
+        res_deps = set()
 
-    def resolve(self, pkg_name):
-        pkg = self.pkg_list[pkg_name]
-        checked_set = set()
-        current_set = pkg['requires']
+        if name not in self.pkgs:
+            return res_deps
 
-        while len(current_set):
-            next_set = set()
+        curr_deps = self.pkgs[name]['requires']
 
-            for current in current_set:
-                pkg = self.pkg_list[current]
-                next_set |= pkg['requires']
+        while len(curr_deps):
+            next_deps = set()
 
-            checked_set |= current_set
-            current_set = next_set - checked_set
+            for curr in curr_deps:
+                if curr in self.pkgs:
+                    next_deps |= self.pkgs[curr]['requires']
 
-        return checked_set
+            res_deps |= curr_deps
+            curr_deps = next_deps - res_deps
 
-    def resolve_all(self):
-        dep_set = set()
+        return res_deps
 
-        for p_name in self.name_set:
-            dep_set |= self.resolve(p_name)
+    def resolve_all(self, names):
+        res_deps = set()
 
-        return dep_set
+        for name in names:
+            res_deps |= self.resolve(name)
+
+        return res_deps
 
     def category(self, categ):
-        res_set = set()
+        return set(name for name in self.pkgs.keys()
+                   if categ in self.pkgs[name]['category'])
 
-        for pkg_name in self.pkg_list.keys():
-            if categ in self.pkg_list[pkg_name]['category']:
-                res_set.add(pkg_name)
-
-        return res_set
-
-    def clean(self):
-        return self.name_set - self.resolve_all() - self.category('Base')
+    def clean(self, names):
+        return names - self.resolve_all(names) - self.category('Base')
 
 
 if __name__ == '__main__':
-    parser = PackageParser('https://ftp.fau.de/cygwin/x86_64/setup.ini',
-                           dataproc.clean_reader(sys.stdin))
+    parser = PackageParser('https://ftp.fau.de/cygwin/x86_64/setup.ini')
+    names = set(dataproc.clean_reader(sys.stdin))
 
-    for p_name in parser.clean():
-        print(p_name)
+    for name in parser.clean(names):
+        print(name)
